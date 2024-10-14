@@ -1,0 +1,1855 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_49e4a1671df759a36b1bf7d0e4e3b43a {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-locatecontrol/0.66.2/L.Control.Locate.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-locatecontrol/0.66.2/L.Control.Locate.min.css"/>
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_49e4a1671df759a36b1bf7d0e4e3b43a" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_49e4a1671df759a36b1bf7d0e4e3b43a = L.map(
+                "map_49e4a1671df759a36b1bf7d0e4e3b43a",
+                {
+                    center: [52.52, 13.405],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 11,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_a23c38a5407d44c3ae3015841cb7e7c4 = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca target=\"_blank\" href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca target=\"_blank\" href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_49e4a1671df759a36b1bf7d0e4e3b43a);
+        
+    
+            var feature_group_6f4425b77f2b9c4dad81d90ce41162c6 = L.featureGroup(
+                {}
+            ).addTo(map_49e4a1671df759a36b1bf7d0e4e3b43a);
+        
+    
+            var marker_41256eba26fc7607ad873c57b94ba521 = L.marker(
+                [52.446309, 13.67013],
+                {}
+            ).addTo(feature_group_6f4425b77f2b9c4dad81d90ce41162c6);
+        
+    
+            var icon_b1914252f87d3f0c12ea90900d9b68f7 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "water", "iconColor": "white", "markerColor": "darkgreen", "prefix": "fa"}
+            );
+            marker_41256eba26fc7607ad873c57b94ba521.setIcon(icon_b1914252f87d3f0c12ea90900d9b68f7);
+        
+    
+        var popup_35e2d390f83dd7a49574d4ebcb0de480 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_b2325515106db398b52e1a9f633740c6 = $(`<div id="html_b2325515106db398b52e1a9f633740c6" style="width: 100.0%; height: 100.0%;"><strong>Licht und Luftbad Müggelsee</strong><br>Public transport nearby: Yes<br><img src='figs/launch_lichluftbad.jpg' width='150px'></div>`)[0];
+                popup_35e2d390f83dd7a49574d4ebcb0de480.setContent(html_b2325515106db398b52e1a9f633740c6);
+            
+        
+
+        marker_41256eba26fc7607ad873c57b94ba521.bindPopup(popup_35e2d390f83dd7a49574d4ebcb0de480)
+        ;
+
+        
+    
+    
+            marker_41256eba26fc7607ad873c57b94ba521.bindTooltip(
+                `<div>
+                     Licht und Luftbad Müggelsee
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_4616e4802c3b7d666e00ddc907c2f3da = L.marker(
+                [52.445685, 13.573238],
+                {}
+            ).addTo(feature_group_6f4425b77f2b9c4dad81d90ce41162c6);
+        
+    
+            var icon_58ec5d365ed805b3d40d63ab82a43a65 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "water", "iconColor": "white", "markerColor": "orange", "prefix": "fa"}
+            );
+            marker_4616e4802c3b7d666e00ddc907c2f3da.setIcon(icon_58ec5d365ed805b3d40d63ab82a43a65);
+        
+    
+        var popup_08c0ae9c2d54015ecbad2f7f05136c92 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_63f360827beac564f3abc79b95e922d9 = $(`<div id="html_63f360827beac564f3abc79b95e922d9" style="width: 100.0%; height: 100.0%;"><strong>Anleger Köpenick</strong><br>Public transport nearby: Yes<br><img src='figs/anleger_koepenick.jpg' width='150px'></div>`)[0];
+                popup_08c0ae9c2d54015ecbad2f7f05136c92.setContent(html_63f360827beac564f3abc79b95e922d9);
+            
+        
+
+        marker_4616e4802c3b7d666e00ddc907c2f3da.bindPopup(popup_08c0ae9c2d54015ecbad2f7f05136c92)
+        ;
+
+        
+    
+    
+            marker_4616e4802c3b7d666e00ddc907c2f3da.bindTooltip(
+                `<div>
+                     Anleger Köpenick
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_71b93c18b4adb1e95991d53cb1f5601c = L.marker(
+                [52.444109, 13.628138],
+                {}
+            ).addTo(feature_group_6f4425b77f2b9c4dad81d90ce41162c6);
+        
+    
+            var icon_61a2e20700a5f7cd65e8a7b349d77206 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "water", "iconColor": "white", "markerColor": "darkgreen", "prefix": "fa"}
+            );
+            marker_71b93c18b4adb1e95991d53cb1f5601c.setIcon(icon_61a2e20700a5f7cd65e8a7b349d77206);
+        
+    
+        var popup_361e8c2305b076cd42ca6c34cd3d01e4 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_61a97f8849e0f37d1f742cbb61ae087b = $(`<div id="html_61a97f8849e0f37d1f742cbb61ae087b" style="width: 100.0%; height: 100.0%;"><strong>Müggelpark Friedrichshagen</strong><br>Public transport nearby: Yes<br><img src='figs/mueggelpark.jpg' width='150px'></div>`)[0];
+                popup_361e8c2305b076cd42ca6c34cd3d01e4.setContent(html_61a97f8849e0f37d1f742cbb61ae087b);
+            
+        
+
+        marker_71b93c18b4adb1e95991d53cb1f5601c.bindPopup(popup_361e8c2305b076cd42ca6c34cd3d01e4)
+        ;
+
+        
+    
+    
+            marker_71b93c18b4adb1e95991d53cb1f5601c.bindTooltip(
+                `<div>
+                     Müggelpark Friedrichshagen
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_c210adddbf08d2f581bdeae20f48a62a = L.marker(
+                [52.495601, 13.4806],
+                {}
+            ).addTo(feature_group_6f4425b77f2b9c4dad81d90ce41162c6);
+        
+    
+            var icon_bd2931e4e42cfe3e35dafa39ae5334c1 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "water", "iconColor": "white", "markerColor": "darkgreen", "prefix": "fa"}
+            );
+            marker_c210adddbf08d2f581bdeae20f48a62a.setIcon(icon_bd2931e4e42cfe3e35dafa39ae5334c1);
+        
+    
+        var popup_12830bc437be548633041a88aa5f998b = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_e7fa8502469c96b6fd1518afd903df97 = $(`<div id="html_e7fa8502469c96b6fd1518afd903df97" style="width: 100.0%; height: 100.0%;"><strong>Anleger Rummelsburger Bucht</strong><br>Public transport nearby: Yes<br><img src='fig/anleger_rummelsburg.jpg' width='150px'></div>`)[0];
+                popup_12830bc437be548633041a88aa5f998b.setContent(html_e7fa8502469c96b6fd1518afd903df97);
+            
+        
+
+        marker_c210adddbf08d2f581bdeae20f48a62a.bindPopup(popup_12830bc437be548633041a88aa5f998b)
+        ;
+
+        
+    
+    
+            marker_c210adddbf08d2f581bdeae20f48a62a.bindTooltip(
+                `<div>
+                     Anleger Rummelsburger Bucht
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_1afdabf145bfe48dd593eac7880bcb74 = L.marker(
+                [52.405757, 13.623889],
+                {}
+            ).addTo(feature_group_6f4425b77f2b9c4dad81d90ce41162c6);
+        
+    
+            var icon_c5e90ca21a58240e765b4d3e247391fd = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "water", "iconColor": "white", "markerColor": "darkgreen", "prefix": "fa"}
+            );
+            marker_1afdabf145bfe48dd593eac7880bcb74.setIcon(icon_c5e90ca21a58240e765b4d3e247391fd);
+        
+    
+        var popup_96cc11ddf3707d40ffb890afb729cbf5 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_d5f4baaff596c5eda7d658e6435e0b96 = $(`<div id="html_d5f4baaff596c5eda7d658e6435e0b96" style="width: 100.0%; height: 100.0%;"><strong>Bammelecke</strong><br>Public transport nearby: Yes<br><img src='fig/bammelecke.jpg' width='150px'></div>`)[0];
+                popup_96cc11ddf3707d40ffb890afb729cbf5.setContent(html_d5f4baaff596c5eda7d658e6435e0b96);
+            
+        
+
+        marker_1afdabf145bfe48dd593eac7880bcb74.bindPopup(popup_96cc11ddf3707d40ffb890afb729cbf5)
+        ;
+
+        
+    
+    
+            marker_1afdabf145bfe48dd593eac7880bcb74.bindTooltip(
+                `<div>
+                     Bammelecke
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_5f151d3ee9bbf8c13c8c65d1f7d8a5b8 = L.marker(
+                [52.424548, 13.750307],
+                {}
+            ).addTo(feature_group_6f4425b77f2b9c4dad81d90ce41162c6);
+        
+    
+            var icon_80e9c8d2bf650c7d1f088b720dec46b7 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "water", "iconColor": "white", "markerColor": "darkgreen", "prefix": "fa"}
+            );
+            marker_5f151d3ee9bbf8c13c8c65d1f7d8a5b8.setIcon(icon_80e9c8d2bf650c7d1f088b720dec46b7);
+        
+    
+        var popup_6604f74b40dda172f01d52b1eeae917f = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_410608ca93c8e179e8f8ee5e65c586bf = $(`<div id="html_410608ca93c8e179e8f8ee5e65c586bf" style="width: 100.0%; height: 100.0%;"><strong>Rathauspark Erkner</strong><br>Public transport nearby: Yes<br><img src='fig/rathauspark_erkner.jpg' width='150px'></div>`)[0];
+                popup_6604f74b40dda172f01d52b1eeae917f.setContent(html_410608ca93c8e179e8f8ee5e65c586bf);
+            
+        
+
+        marker_5f151d3ee9bbf8c13c8c65d1f7d8a5b8.bindPopup(popup_6604f74b40dda172f01d52b1eeae917f)
+        ;
+
+        
+    
+    
+            marker_5f151d3ee9bbf8c13c8c65d1f7d8a5b8.bindTooltip(
+                `<div>
+                     Rathauspark Erkner
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var feature_group_a33273ab8841e7863a209b04d09edce4 = L.featureGroup(
+                {}
+            ).addTo(map_49e4a1671df759a36b1bf7d0e4e3b43a);
+        
+    
+            var marker_1b3cf02b075e6f24f920276533529305 = L.marker(
+                [52.363209, 13.694662],
+                {}
+            ).addTo(feature_group_a33273ab8841e7863a209b04d09edce4);
+        
+    
+            var icon_25f989effa3d330ed404309cdc15ddbe = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "water", "iconColor": "white", "markerColor": "darkgreen", "prefix": "fa"}
+            );
+            marker_1b3cf02b075e6f24f920276533529305.setIcon(icon_25f989effa3d330ed404309cdc15ddbe);
+        
+    
+        var popup_5b4b63fa9f457d9469ac81f3f2ad209e = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_00c733ce71c0707dfbfdd14bb5548a3c = $(`<div id="html_00c733ce71c0707dfbfdd14bb5548a3c" style="width: 100.0%; height: 100.0%;"><strong>Badestelle Wernsdorf</strong><br>Public transport nearby: No<br></div>`)[0];
+                popup_5b4b63fa9f457d9469ac81f3f2ad209e.setContent(html_00c733ce71c0707dfbfdd14bb5548a3c);
+            
+        
+
+        marker_1b3cf02b075e6f24f920276533529305.bindPopup(popup_5b4b63fa9f457d9469ac81f3f2ad209e)
+        ;
+
+        
+    
+    
+            marker_1b3cf02b075e6f24f920276533529305.bindTooltip(
+                `<div>
+                     Badestelle Wernsdorf
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_d5159181a43d4e3a633b249586248469 = L.marker(
+                [52.42847, 13.676986],
+                {}
+            ).addTo(feature_group_a33273ab8841e7863a209b04d09edce4);
+        
+    
+            var icon_3face960dc30a28d690682e90419d8f6 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "water", "iconColor": "white", "markerColor": "darkgreen", "prefix": "fa"}
+            );
+            marker_d5159181a43d4e3a633b249586248469.setIcon(icon_3face960dc30a28d690682e90419d8f6);
+        
+    
+        var popup_ed4804df377ab225f49a8b602cb27bd4 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_8015098151b2849ad7614eacb0219517 = $(`<div id="html_8015098151b2849ad7614eacb0219517" style="width: 100.0%; height: 100.0%;"><strong>Badestelle kleiner Müggelsee</strong><br>Public transport nearby: No<br></div>`)[0];
+                popup_ed4804df377ab225f49a8b602cb27bd4.setContent(html_8015098151b2849ad7614eacb0219517);
+            
+        
+
+        marker_d5159181a43d4e3a633b249586248469.bindPopup(popup_ed4804df377ab225f49a8b602cb27bd4)
+        ;
+
+        
+    
+    
+            marker_d5159181a43d4e3a633b249586248469.bindTooltip(
+                `<div>
+                     Badestelle kleiner Müggelsee
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_ef6b2b5b78056b1f3931b08ed5d7d553 = L.marker(
+                [52.453561, 13.553041],
+                {}
+            ).addTo(feature_group_a33273ab8841e7863a209b04d09edce4);
+        
+    
+            var icon_8e8f6cef7e22d2435af11d2dc2e8e110 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "water", "iconColor": "white", "markerColor": "darkgreen", "prefix": "fa"}
+            );
+            marker_ef6b2b5b78056b1f3931b08ed5d7d553.setIcon(icon_8e8f6cef7e22d2435af11d2dc2e8e110);
+        
+    
+        var popup_1c556b2b944acd55b173c7fce781260c = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_505f2d7801cf97b4698f95393ec33e23 = $(`<div id="html_505f2d7801cf97b4698f95393ec33e23" style="width: 100.0%; height: 100.0%;"><strong>Altes Flussbad Oberspree</strong><br>Public transport nearby: No<br></div>`)[0];
+                popup_1c556b2b944acd55b173c7fce781260c.setContent(html_505f2d7801cf97b4698f95393ec33e23);
+            
+        
+
+        marker_ef6b2b5b78056b1f3931b08ed5d7d553.bindPopup(popup_1c556b2b944acd55b173c7fce781260c)
+        ;
+
+        
+    
+    
+            marker_ef6b2b5b78056b1f3931b08ed5d7d553.bindTooltip(
+                `<div>
+                     Altes Flussbad Oberspree
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var feature_group_5f52716409888e38342043973681e6e1 = L.featureGroup(
+                {}
+            ).addTo(map_49e4a1671df759a36b1bf7d0e4e3b43a);
+        
+    
+            var marker_e825715647a163351c600620d2acc06c = L.marker(
+                [52.446071, 13.580577],
+                {}
+            ).addTo(feature_group_5f52716409888e38342043973681e6e1);
+        
+    
+            var icon_79b547af4e1eecc1afd8779f6bed5829 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "umbrella-beach", "iconColor": "white", "markerColor": "darkgreen", "prefix": "fa"}
+            );
+            marker_e825715647a163351c600620d2acc06c.setIcon(icon_79b547af4e1eecc1afd8779f6bed5829);
+        
+    
+        var popup_16c6fd2c311874de0848a1c0df7746a6 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_ef6e4847fe5d343de7037af9b34ca147 = $(`<div id="html_ef6e4847fe5d343de7037af9b34ca147" style="width: 100.0%; height: 100.0%;"><strong>Aqua Berlin</strong><br><img src='dummy.jpg' width='150px'></div>`)[0];
+                popup_16c6fd2c311874de0848a1c0df7746a6.setContent(html_ef6e4847fe5d343de7037af9b34ca147);
+            
+        
+
+        marker_e825715647a163351c600620d2acc06c.bindPopup(popup_16c6fd2c311874de0848a1c0df7746a6)
+        ;
+
+        
+    
+    
+            marker_e825715647a163351c600620d2acc06c.bindTooltip(
+                `<div>
+                     Aqua Berlin
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_cd3ea67ea38685379d996e22beb7e06c = L.marker(
+                [52.480389, 13.498169],
+                {}
+            ).addTo(feature_group_5f52716409888e38342043973681e6e1);
+        
+    
+            var icon_8f5c8e91b7b086a8fb37b12ac803789e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "umbrella-beach", "iconColor": "white", "markerColor": "orange", "prefix": "fa"}
+            );
+            marker_cd3ea67ea38685379d996e22beb7e06c.setIcon(icon_8f5c8e91b7b086a8fb37b12ac803789e);
+        
+    
+        var popup_ce20c0f650d6264388d9070a9e6b41b5 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_46b8e031ea21b5165608e116c6659e2a = $(`<div id="html_46b8e031ea21b5165608e116c6659e2a" style="width: 100.0%; height: 100.0%;"><strong>Funkhaus Berlin</strong><br><img src='funkhaus.jpg' width='150px'></div>`)[0];
+                popup_ce20c0f650d6264388d9070a9e6b41b5.setContent(html_46b8e031ea21b5165608e116c6659e2a);
+            
+        
+
+        marker_cd3ea67ea38685379d996e22beb7e06c.bindPopup(popup_ce20c0f650d6264388d9070a9e6b41b5)
+        ;
+
+        
+    
+    
+            marker_cd3ea67ea38685379d996e22beb7e06c.bindTooltip(
+                `<div>
+                     Funkhaus Berlin
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_a8823f99f223ec7584284451e6ddf8f8 = L.marker(
+                [52.39401, 13.933529],
+                {}
+            ).addTo(feature_group_5f52716409888e38342043973681e6e1);
+        
+    
+            var icon_c9d82cb84db5808acf5c3606ad032cf9 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "umbrella-beach", "iconColor": "white", "markerColor": "darkgreen", "prefix": "fa"}
+            );
+            marker_a8823f99f223ec7584284451e6ddf8f8.setIcon(icon_c9d82cb84db5808acf5c3606ad032cf9);
+        
+    
+        var popup_9760f6b14a86a38931c4ef49404f9590 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_a89e8f6d15668b0035d8cd94ac2f410e = $(`<div id="html_a89e8f6d15668b0035d8cd94ac2f410e" style="width: 100.0%; height: 100.0%;"><strong>Spree Curry Hangelsberg</strong><br><img src=' spreecurry.jpg' width='150px'></div>`)[0];
+                popup_9760f6b14a86a38931c4ef49404f9590.setContent(html_a89e8f6d15668b0035d8cd94ac2f410e);
+            
+        
+
+        marker_a8823f99f223ec7584284451e6ddf8f8.bindPopup(popup_9760f6b14a86a38931c4ef49404f9590)
+        ;
+
+        
+    
+    
+            marker_a8823f99f223ec7584284451e6ddf8f8.bindTooltip(
+                `<div>
+                     Spree Curry Hangelsberg
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var feature_group_a06e64d95265bd1daa97908bdde6c615 = L.featureGroup(
+                {}
+            ).addTo(map_49e4a1671df759a36b1bf7d0e4e3b43a);
+        
+    
+        function geo_json_899357e7e37164bc4567158fa3a41cf9_styler(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {};
+            }
+        }
+        function geo_json_899357e7e37164bc4567158fa3a41cf9_highlighter(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {"opacity": 1.0, "weight": 6};
+            }
+        }
+
+        function geo_json_899357e7e37164bc4567158fa3a41cf9_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        geo_json_899357e7e37164bc4567158fa3a41cf9.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_899357e7e37164bc4567158fa3a41cf9_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_899357e7e37164bc4567158fa3a41cf9 = L.geoJson(null, {
+                onEachFeature: geo_json_899357e7e37164bc4567158fa3a41cf9_onEachFeature,
+            
+                style: geo_json_899357e7e37164bc4567158fa3a41cf9_styler,
+        });
+
+        function geo_json_899357e7e37164bc4567158fa3a41cf9_add (data) {
+            geo_json_899357e7e37164bc4567158fa3a41cf9
+                .addData(data)
+                .addTo(feature_group_a06e64d95265bd1daa97908bdde6c615);
+        }
+            geo_json_899357e7e37164bc4567158fa3a41cf9_add({"features": [{"geometry": {"coordinates": [[13.627875, 52.444011], [13.627682, 52.443857], [13.62648, 52.444021], [13.625219, 52.444593], [13.617908, 52.444436], [13.608606, 52.447549], [13.604486, 52.448451], [13.601503, 52.449523], [13.595667, 52.449903], [13.588028, 52.449314], [13.585367, 52.44798], [13.583672, 52.446829], [13.581628, 52.446633], [13.580947, 52.447182], [13.57775, 52.448373], [13.574831, 52.448543], [13.572836, 52.448176]], "type": "LineString"}, "properties": {"end": "Dahme", "start": "M\u00fcggelpark Friedrichshagen", "waterbody": "M\u00fcggelspree"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_899357e7e37164bc4567158fa3a41cf9.bindTooltip(
+                `<div>
+                     Müggelspree | 4.1 km
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_4a2d46725411e65a9b225c4d5525230b = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_64f13f3aac16e276bef9e597731ecc9c = $(`<div id="html_64f13f3aac16e276bef9e597731ecc9c" style="width: 100.0%; height: 100.0%;"><strong>Start:</strong> Müggelpark Friedrichshagen<br><strong>End:</strong> Dahme<br><strong>Length:</strong> 4.11 km</div>`)[0];
+                popup_4a2d46725411e65a9b225c4d5525230b.setContent(html_64f13f3aac16e276bef9e597731ecc9c);
+            
+        
+
+        geo_json_899357e7e37164bc4567158fa3a41cf9.bindPopup(popup_4a2d46725411e65a9b225c4d5525230b)
+        ;
+
+        
+    
+    
+        function geo_json_2113ab31400372885ad377a8419aa179_styler(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {};
+            }
+        }
+        function geo_json_2113ab31400372885ad377a8419aa179_highlighter(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {"opacity": 1.0, "weight": 6};
+            }
+        }
+
+        function geo_json_2113ab31400372885ad377a8419aa179_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        geo_json_2113ab31400372885ad377a8419aa179.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_2113ab31400372885ad377a8419aa179_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_2113ab31400372885ad377a8419aa179 = L.geoJson(null, {
+                onEachFeature: geo_json_2113ab31400372885ad377a8419aa179_onEachFeature,
+            
+                style: geo_json_2113ab31400372885ad377a8419aa179_styler,
+        });
+
+        function geo_json_2113ab31400372885ad377a8419aa179_add (data) {
+            geo_json_2113ab31400372885ad377a8419aa179
+                .addData(data)
+                .addTo(feature_group_a06e64d95265bd1daa97908bdde6c615);
+        }
+            geo_json_2113ab31400372885ad377a8419aa179_add({"features": [{"geometry": {"coordinates": [[13.572686, 52.44815], [13.569145, 52.449693], [13.566527, 52.452662], [13.564296, 52.453891], [13.558352, 52.453891], [13.553202, 52.45397], [13.546615, 52.455526], [13.53977, 52.456258], [13.535457, 52.455552], [13.531981, 52.453878], [13.52829, 52.453669], [13.524342, 52.45414], [13.522131, 52.455578], [13.520501, 52.457448], [13.518677, 52.458324], [13.515372, 52.458925], [13.511853, 52.460363], [13.506467, 52.462364], [13.50282, 52.464521], [13.501532, 52.466377], [13.498957, 52.469802]], "type": "LineString"}, "properties": {"end": "Britzer Verbindungskanal", "start": "Dahme", "waterbody": "Spree"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_2113ab31400372885ad377a8419aa179.bindTooltip(
+                `<div>
+                     Spree | 6.3 km
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_0bd6532b60c3a7ed383aaf65f1815d8e = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_38cd850d67c18213884d29a0d98be4ed = $(`<div id="html_38cd850d67c18213884d29a0d98be4ed" style="width: 100.0%; height: 100.0%;"><strong>Start:</strong> Dahme<br><strong>End:</strong> Britzer Verbindungskanal<br><strong>Length:</strong> 6.26 km</div>`)[0];
+                popup_0bd6532b60c3a7ed383aaf65f1815d8e.setContent(html_38cd850d67c18213884d29a0d98be4ed);
+            
+        
+
+        geo_json_2113ab31400372885ad377a8419aa179.bindPopup(popup_0bd6532b60c3a7ed383aaf65f1815d8e)
+        ;
+
+        
+    
+    
+        function geo_json_91f87f9b5fa5840bdf139fe2631931f9_styler(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {};
+            }
+        }
+        function geo_json_91f87f9b5fa5840bdf139fe2631931f9_highlighter(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {"opacity": 1.0, "weight": 6};
+            }
+        }
+
+        function geo_json_91f87f9b5fa5840bdf139fe2631931f9_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        geo_json_91f87f9b5fa5840bdf139fe2631931f9.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_91f87f9b5fa5840bdf139fe2631931f9_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_91f87f9b5fa5840bdf139fe2631931f9 = L.geoJson(null, {
+                onEachFeature: geo_json_91f87f9b5fa5840bdf139fe2631931f9_onEachFeature,
+            
+                style: geo_json_91f87f9b5fa5840bdf139fe2631931f9_styler,
+        });
+
+        function geo_json_91f87f9b5fa5840bdf139fe2631931f9_add (data) {
+            geo_json_91f87f9b5fa5840bdf139fe2631931f9
+                .addData(data)
+                .addTo(feature_group_a06e64d95265bd1daa97908bdde6c615);
+        }
+            geo_json_91f87f9b5fa5840bdf139fe2631931f9_add({"features": [{"geometry": {"coordinates": [[13.498791, 52.469916], [13.497509, 52.471018], [13.496527, 52.472308], [13.495696, 52.474135], [13.495502, 52.475403], [13.496586, 52.477853], [13.497938, 52.479291], [13.498142, 52.480101], [13.49708, 52.48099], [13.49576, 52.482088], [13.494687, 52.48491], [13.492928, 52.487158], [13.491039, 52.488438], [13.489451, 52.488673], [13.486855, 52.488523], [13.48354, 52.488059], [13.481126, 52.488353]], "type": "LineString"}, "properties": {"end": "Insel der Jugend", "start": "Spree/Britzer Verbindungskanal", "waterbody": "Spree"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_91f87f9b5fa5840bdf139fe2631931f9.bindTooltip(
+                `<div>
+                     Spree | 3.0 km
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_567318f80ea30675a46acd7fd5bbda63 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_b8315965d419d31ddc7a1c1bb1bb67f5 = $(`<div id="html_b8315965d419d31ddc7a1c1bb1bb67f5" style="width: 100.0%; height: 100.0%;"><strong>Start:</strong> Spree/Britzer Verbindungskanal<br><strong>End:</strong> Insel der Jugend<br><strong>Length:</strong> 2.97 km</div>`)[0];
+                popup_567318f80ea30675a46acd7fd5bbda63.setContent(html_b8315965d419d31ddc7a1c1bb1bb67f5);
+            
+        
+
+        geo_json_91f87f9b5fa5840bdf139fe2631931f9.bindPopup(popup_567318f80ea30675a46acd7fd5bbda63)
+        ;
+
+        
+    
+    
+        function geo_json_f879baec044f89d70945f50bf95a3f0d_styler(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {};
+            }
+        }
+        function geo_json_f879baec044f89d70945f50bf95a3f0d_highlighter(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {"opacity": 1.0, "weight": 6};
+            }
+        }
+
+        function geo_json_f879baec044f89d70945f50bf95a3f0d_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        geo_json_f879baec044f89d70945f50bf95a3f0d.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_f879baec044f89d70945f50bf95a3f0d_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_f879baec044f89d70945f50bf95a3f0d = L.geoJson(null, {
+                onEachFeature: geo_json_f879baec044f89d70945f50bf95a3f0d_onEachFeature,
+            
+                style: geo_json_f879baec044f89d70945f50bf95a3f0d_styler,
+        });
+
+        function geo_json_f879baec044f89d70945f50bf95a3f0d_add (data) {
+            geo_json_f879baec044f89d70945f50bf95a3f0d
+                .addData(data)
+                .addTo(feature_group_a06e64d95265bd1daa97908bdde6c615);
+        }
+            geo_json_f879baec044f89d70945f50bf95a3f0d_add({"features": [{"geometry": {"coordinates": [[13.480976, 52.488392], [13.478004, 52.489823], [13.475032, 52.491313], [13.471459, 52.492175], [13.468122, 52.493364], [13.465451, 52.494474], [13.464367, 52.495258], [13.46235, 52.496199], [13.460741, 52.496656], [13.459314, 52.496878], [13.459014, 52.497192], [13.458241, 52.497492], [13.456213, 52.498178], [13.45499, 52.498629], [13.453896, 52.498994], [13.452812, 52.499412], [13.452265, 52.499726], [13.451632, 52.499869], [13.45072, 52.499497], [13.450677, 52.499177], [13.450457, 52.498779], [13.450146, 52.498537], [13.449787, 52.498224], [13.449486, 52.498031], [13.448628, 52.497384], [13.44763, 52.496676], [13.446617, 52.495869], [13.445957, 52.495363], [13.445179, 52.494755], [13.444412, 52.49419], [13.441097, 52.491652], [13.439112, 52.490578]], "type": "LineString"}, "properties": {"end": "Neuk\u00f6llner Schiffahrtskanal", "start": "Insel der Jugend", "waterbody": "Spree"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_f879baec044f89d70945f50bf95a3f0d.bindTooltip(
+                `<div>
+                     Spree | 3.7 km
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_9fd903f95bbfaaa216570b9b122cd8d6 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_0afd19793f3e31b09804c0fe36d4521d = $(`<div id="html_0afd19793f3e31b09804c0fe36d4521d" style="width: 100.0%; height: 100.0%;"><strong>Start:</strong> Insel der Jugend<br><strong>End:</strong> Neuköllner Schiffahrtskanal<br><strong>Length:</strong> 3.75 km</div>`)[0];
+                popup_9fd903f95bbfaaa216570b9b122cd8d6.setContent(html_0afd19793f3e31b09804c0fe36d4521d);
+            
+        
+
+        geo_json_f879baec044f89d70945f50bf95a3f0d.bindPopup(popup_9fd903f95bbfaaa216570b9b122cd8d6)
+        ;
+
+        
+    
+    
+        function geo_json_050112635055a077a1e55db475e4ed7e_styler(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {};
+            }
+        }
+        function geo_json_050112635055a077a1e55db475e4ed7e_highlighter(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {"opacity": 1.0, "weight": 6};
+            }
+        }
+
+        function geo_json_050112635055a077a1e55db475e4ed7e_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        geo_json_050112635055a077a1e55db475e4ed7e.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_050112635055a077a1e55db475e4ed7e_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_050112635055a077a1e55db475e4ed7e = L.geoJson(null, {
+                onEachFeature: geo_json_050112635055a077a1e55db475e4ed7e_onEachFeature,
+            
+                style: geo_json_050112635055a077a1e55db475e4ed7e_styler,
+        });
+
+        function geo_json_050112635055a077a1e55db475e4ed7e_add (data) {
+            geo_json_050112635055a077a1e55db475e4ed7e
+                .addData(data)
+                .addTo(feature_group_a06e64d95265bd1daa97908bdde6c615);
+        }
+            geo_json_050112635055a077a1e55db475e4ed7e_add({"features": [{"geometry": {"coordinates": [[13.498764, 52.469828], [13.497691, 52.469194], [13.494644, 52.465848], [13.491307, 52.462553], [13.488808, 52.460873], [13.486018, 52.459742], [13.481673, 52.458932], [13.478884, 52.45884], [13.456256, 52.4592]], "type": "LineString"}, "properties": {"end": "Hafen Britz Ost", "start": "Spree", "waterbody": "Neuk\u00f6llner Schiffahrtskanal"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_050112635055a077a1e55db475e4ed7e.bindTooltip(
+                `<div>
+                     Neuköllner Schiffahrtskanal | 3.5 km
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_fbdd72f28b41e44a6a43c85925109770 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_9187eafce9b9a439575f2592227a6db8 = $(`<div id="html_9187eafce9b9a439575f2592227a6db8" style="width: 100.0%; height: 100.0%;"><strong>Start:</strong> Spree<br><strong>End:</strong> Hafen Britz Ost<br><strong>Length:</strong> 3.48 km</div>`)[0];
+                popup_fbdd72f28b41e44a6a43c85925109770.setContent(html_9187eafce9b9a439575f2592227a6db8);
+            
+        
+
+        geo_json_050112635055a077a1e55db475e4ed7e.bindPopup(popup_fbdd72f28b41e44a6a43c85925109770)
+        ;
+
+        
+    
+    
+        function geo_json_63a573dfcdfdff764bc0f95de7491f53_styler(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {};
+            }
+        }
+        function geo_json_63a573dfcdfdff764bc0f95de7491f53_highlighter(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {"opacity": 1.0, "weight": 6};
+            }
+        }
+
+        function geo_json_63a573dfcdfdff764bc0f95de7491f53_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        geo_json_63a573dfcdfdff764bc0f95de7491f53.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_63a573dfcdfdff764bc0f95de7491f53_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_63a573dfcdfdff764bc0f95de7491f53 = L.geoJson(null, {
+                onEachFeature: geo_json_63a573dfcdfdff764bc0f95de7491f53_onEachFeature,
+            
+                style: geo_json_63a573dfcdfdff764bc0f95de7491f53_styler,
+        });
+
+        function geo_json_63a573dfcdfdff764bc0f95de7491f53_add (data) {
+            geo_json_63a573dfcdfdff764bc0f95de7491f53
+                .addData(data)
+                .addTo(feature_group_a06e64d95265bd1daa97908bdde6c615);
+        }
+            geo_json_63a573dfcdfdff764bc0f95de7491f53_add({"features": [{"geometry": {"coordinates": [[13.627971, 52.443965], [13.628347, 52.443782], [13.633347, 52.441179], [13.638368, 52.439139], [13.645277, 52.437857], [13.6518, 52.437333], [13.658409, 52.436967], [13.665147, 52.436444], [13.671284, 52.435659], [13.674417, 52.434586], [13.675961, 52.433334], [13.677356, 52.431839], [13.678794, 52.430295]], "type": "LineString"}, "properties": {"end": "M\u00fcggelpark Friedrichshagen", "start": "kleiner M\u00fcggelsee", "waterbody": "M\u00fcggelsee"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_63a573dfcdfdff764bc0f95de7491f53.bindTooltip(
+                `<div>
+                     Müggelsee | 4.0 km
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_966a4cf2eca7991847b0dd6bfb4d7f97 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_c09f351fc417801714f90c2d7a90a435 = $(`<div id="html_c09f351fc417801714f90c2d7a90a435" style="width: 100.0%; height: 100.0%;"><strong>Start:</strong> kleiner Müggelsee<br><strong>End:</strong> Müggelpark Friedrichshagen<br><strong>Length:</strong> 3.98 km</div>`)[0];
+                popup_966a4cf2eca7991847b0dd6bfb4d7f97.setContent(html_c09f351fc417801714f90c2d7a90a435);
+            
+        
+
+        geo_json_63a573dfcdfdff764bc0f95de7491f53.bindPopup(popup_966a4cf2eca7991847b0dd6bfb4d7f97)
+        ;
+
+        
+    
+    
+        function geo_json_16680c529154423c19db7207bfd41730_styler(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {};
+            }
+        }
+        function geo_json_16680c529154423c19db7207bfd41730_highlighter(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {"opacity": 1.0, "weight": 6};
+            }
+        }
+
+        function geo_json_16680c529154423c19db7207bfd41730_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        geo_json_16680c529154423c19db7207bfd41730.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_16680c529154423c19db7207bfd41730_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_16680c529154423c19db7207bfd41730 = L.geoJson(null, {
+                onEachFeature: geo_json_16680c529154423c19db7207bfd41730_onEachFeature,
+            
+                style: geo_json_16680c529154423c19db7207bfd41730_styler,
+        });
+
+        function geo_json_16680c529154423c19db7207bfd41730_add (data) {
+            geo_json_16680c529154423c19db7207bfd41730
+                .addData(data)
+                .addTo(feature_group_a06e64d95265bd1daa97908bdde6c615);
+        }
+            geo_json_16680c529154423c19db7207bfd41730_add({"features": [{"geometry": {"coordinates": [[13.678966, 52.430164], [13.681959, 52.429438], [13.683643, 52.429046], [13.686181, 52.428993], [13.686969, 52.429082], [13.6889, 52.4297], [13.689888, 52.43003], [13.691143, 52.430092], [13.692838, 52.429975], [13.695316, 52.429664], [13.696899, 52.429373], [13.698728, 52.428791], [13.699458, 52.428025], [13.700461, 52.42725], [13.701405, 52.42672], [13.70258, 52.426416], [13.705251, 52.426174], [13.706512, 52.425968], [13.708239, 52.425755], [13.710905, 52.425762], [13.712279, 52.425892], [13.713813, 52.425847], [13.715057, 52.425385], [13.71613, 52.424525], [13.717203, 52.423445], [13.718823, 52.422196], [13.721001, 52.421012], [13.722879, 52.42056], [13.724831, 52.420521], [13.728179, 52.420717]], "type": "LineString"}, "properties": {"end": "kleiner M\u00fcggelsee", "start": "D\u00e4meritzsee", "waterbody": "M\u00fcggelspree"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_16680c529154423c19db7207bfd41730.bindTooltip(
+                `<div>
+                     Müggelspree | 3.8 km
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_1e766c6c76abdfe91a96a05bad23da04 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_2742799418e638996904a7b9e3ffe7d1 = $(`<div id="html_2742799418e638996904a7b9e3ffe7d1" style="width: 100.0%; height: 100.0%;"><strong>Start:</strong> Dämeritzsee<br><strong>End:</strong> kleiner Müggelsee<br><strong>Length:</strong> 3.81 km</div>`)[0];
+                popup_1e766c6c76abdfe91a96a05bad23da04.setContent(html_2742799418e638996904a7b9e3ffe7d1);
+            
+        
+
+        geo_json_16680c529154423c19db7207bfd41730.bindPopup(popup_1e766c6c76abdfe91a96a05bad23da04)
+        ;
+
+        
+    
+    
+        function geo_json_ef62c60619ca3c2bef767aac9f1cd403_styler(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {};
+            }
+        }
+        function geo_json_ef62c60619ca3c2bef767aac9f1cd403_highlighter(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {"opacity": 1.0, "weight": 6};
+            }
+        }
+
+        function geo_json_ef62c60619ca3c2bef767aac9f1cd403_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        geo_json_ef62c60619ca3c2bef767aac9f1cd403.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_ef62c60619ca3c2bef767aac9f1cd403_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_ef62c60619ca3c2bef767aac9f1cd403 = L.geoJson(null, {
+                onEachFeature: geo_json_ef62c60619ca3c2bef767aac9f1cd403_onEachFeature,
+            
+                style: geo_json_ef62c60619ca3c2bef767aac9f1cd403_styler,
+        });
+
+        function geo_json_ef62c60619ca3c2bef767aac9f1cd403_add (data) {
+            geo_json_ef62c60619ca3c2bef767aac9f1cd403
+                .addData(data)
+                .addTo(feature_group_a06e64d95265bd1daa97908bdde6c615);
+        }
+            geo_json_ef62c60619ca3c2bef767aac9f1cd403_add({"features": [{"geometry": {"coordinates": [[13.728898, 52.420285], [13.72776, 52.418231], [13.726757, 52.416834], [13.72658, 52.416572], [13.726376, 52.416454], [13.726103, 52.416326], [13.725384, 52.416241], [13.725078, 52.415754], [13.724676, 52.415486], [13.724284, 52.415198], [13.724054, 52.414887], [13.723957, 52.414432], [13.723732, 52.413804], [13.723522, 52.413372], [13.723093, 52.413064], [13.722911, 52.412865], [13.722734, 52.412629], [13.722321, 52.412551], [13.721747, 52.412253], [13.721403, 52.411899], [13.72128, 52.411615], [13.720953, 52.411494], [13.720492, 52.411585], [13.720003, 52.411677], [13.719494, 52.411605], [13.718818, 52.411366], [13.718571, 52.411222], [13.717981, 52.411088], [13.71738, 52.410947], [13.715867, 52.410617], [13.71525, 52.410505], [13.714854, 52.410381], [13.714435, 52.410299], [13.713834, 52.410168], [13.713346, 52.410047], [13.712858, 52.409884], [13.71267, 52.409619], [13.712638, 52.409327], [13.712858, 52.409131], [13.713132, 52.408941], [13.71348, 52.408771], [13.713673, 52.40864], [13.713845, 52.408516], [13.713732, 52.408277], [13.713491, 52.407963], [13.713298, 52.407714], [13.713223, 52.407442], [13.713148, 52.40724], [13.712901, 52.407014], [13.712617, 52.406719], [13.712407, 52.40648], [13.712263, 52.406274], [13.712241, 52.40614], [13.712499, 52.405931], [13.712853, 52.405656], [13.713062, 52.405397], [13.713158, 52.405076], [13.713169, 52.404687], [13.713062, 52.404376], [13.712933, 52.404059], [13.712482, 52.40378], [13.711925, 52.403649], [13.711689, 52.403427], [13.711667, 52.4031], [13.711646, 52.40272], [13.711388, 52.402353], [13.711109, 52.402085], [13.710326, 52.402006], [13.70979, 52.401843], [13.709618, 52.401535], [13.709124, 52.401588], [13.708577, 52.401646], [13.70818, 52.401398], [13.707891, 52.401064], [13.707676, 52.400697], [13.707182, 52.400632], [13.706517, 52.400841], [13.705927, 52.400828], [13.70538, 52.400501], [13.704983, 52.400102], [13.704726, 52.399912], [13.704618, 52.399679], [13.704168, 52.399368], [13.703797, 52.3991], [13.703594, 52.398776], [13.703465, 52.398599], [13.703261, 52.398468], [13.70295, 52.398328], [13.702601, 52.398112], [13.702392, 52.397981], [13.701877, 52.397781], [13.698256, 52.396396], [13.694286, 52.394458], [13.689737, 52.392494], [13.684201, 52.39108], [13.680961, 52.389993], [13.680167, 52.389338], [13.679502, 52.387518], [13.679116, 52.385135], [13.674502, 52.382135], [13.668687, 52.379869], [13.660812, 52.378704]], "type": "LineString"}, "properties": {"end": "Schm\u00f6ckwitz", "start": "D\u00e4meritzsee", "waterbody": "Gosener Graben, Seddinsee"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_ef62c60619ca3c2bef767aac9f1cd403.bindTooltip(
+                `<div>
+                     Gosener Graben, Seddinsee | 7.4 km
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_75cefb85fa263306d7f82996e077f47d = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_20c385617f94bffd0adc3111d9108995 = $(`<div id="html_20c385617f94bffd0adc3111d9108995" style="width: 100.0%; height: 100.0%;"><strong>Start:</strong> Dämeritzsee<br><strong>End:</strong> Schmöckwitz<br><strong>Length:</strong> 7.39 km</div>`)[0];
+                popup_75cefb85fa263306d7f82996e077f47d.setContent(html_20c385617f94bffd0adc3111d9108995);
+            
+        
+
+        geo_json_ef62c60619ca3c2bef767aac9f1cd403.bindPopup(popup_75cefb85fa263306d7f82996e077f47d)
+        ;
+
+        
+    
+    
+        function geo_json_4b59e2fe4ac485a7caa1133b7a9755ca_styler(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {};
+            }
+        }
+        function geo_json_4b59e2fe4ac485a7caa1133b7a9755ca_highlighter(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {"opacity": 1.0, "weight": 6};
+            }
+        }
+
+        function geo_json_4b59e2fe4ac485a7caa1133b7a9755ca_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        geo_json_4b59e2fe4ac485a7caa1133b7a9755ca.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_4b59e2fe4ac485a7caa1133b7a9755ca_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_4b59e2fe4ac485a7caa1133b7a9755ca = L.geoJson(null, {
+                onEachFeature: geo_json_4b59e2fe4ac485a7caa1133b7a9755ca_onEachFeature,
+            
+                style: geo_json_4b59e2fe4ac485a7caa1133b7a9755ca_styler,
+        });
+
+        function geo_json_4b59e2fe4ac485a7caa1133b7a9755ca_add (data) {
+            geo_json_4b59e2fe4ac485a7caa1133b7a9755ca
+                .addData(data)
+                .addTo(feature_group_a06e64d95265bd1daa97908bdde6c615);
+        }
+            geo_json_4b59e2fe4ac485a7caa1133b7a9755ca_add({"features": [{"geometry": {"coordinates": [[13.659739, 52.3789], [13.656145, 52.379568], [13.654933, 52.380701], [13.65253, 52.381598], [13.649011, 52.383445], [13.646071, 52.385331], [13.645492, 52.38744], [13.644998, 52.390491], [13.642981, 52.393215], [13.640964, 52.394472], [13.638604, 52.395231], [13.636351, 52.397365], [13.632703, 52.398203], [13.630128, 52.398727], [13.628068, 52.400062], [13.627381, 52.401712], [13.625751, 52.403545], [13.624334, 52.405836], [13.624195, 52.406817], [13.622671, 52.408048], [13.6178, 52.409678], [13.614893, 52.410181], [13.606074, 52.411805], [13.601321, 52.412564], [13.59645, 52.413133], [13.591837, 52.413048], [13.589605, 52.41348], [13.587095, 52.414403], [13.584895, 52.415967], [13.584112, 52.41776], [13.583812, 52.41986], [13.581988, 52.422575], [13.581408, 52.424859], [13.579123, 52.426834], [13.575561, 52.428562]], "type": "LineString"}, "properties": {"end": "Teltowkanal", "start": "Schm\u00f6ckwitz", "waterbody": "Dahme"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_4b59e2fe4ac485a7caa1133b7a9755ca.bindTooltip(
+                `<div>
+                     Dahme | 8.8 km
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_e210db032e1100dfaded75571ff53974 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_0fe4bcf2f080db8cf18cb2a23048dbda = $(`<div id="html_0fe4bcf2f080db8cf18cb2a23048dbda" style="width: 100.0%; height: 100.0%;"><strong>Start:</strong> Schmöckwitz<br><strong>End:</strong> Teltowkanal<br><strong>Length:</strong> 8.79 km</div>`)[0];
+                popup_e210db032e1100dfaded75571ff53974.setContent(html_0fe4bcf2f080db8cf18cb2a23048dbda);
+            
+        
+
+        geo_json_4b59e2fe4ac485a7caa1133b7a9755ca.bindPopup(popup_e210db032e1100dfaded75571ff53974)
+        ;
+
+        
+    
+    
+        function geo_json_d6ef04912d7903c24d97e5c92bd0f9d7_styler(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {};
+            }
+        }
+        function geo_json_d6ef04912d7903c24d97e5c92bd0f9d7_highlighter(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {"opacity": 1.0, "weight": 6};
+            }
+        }
+
+        function geo_json_d6ef04912d7903c24d97e5c92bd0f9d7_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        geo_json_d6ef04912d7903c24d97e5c92bd0f9d7.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_d6ef04912d7903c24d97e5c92bd0f9d7_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_d6ef04912d7903c24d97e5c92bd0f9d7 = L.geoJson(null, {
+                onEachFeature: geo_json_d6ef04912d7903c24d97e5c92bd0f9d7_onEachFeature,
+            
+                style: geo_json_d6ef04912d7903c24d97e5c92bd0f9d7_styler,
+        });
+
+        function geo_json_d6ef04912d7903c24d97e5c92bd0f9d7_add (data) {
+            geo_json_d6ef04912d7903c24d97e5c92bd0f9d7
+                .addData(data)
+                .addTo(feature_group_a06e64d95265bd1daa97908bdde6c615);
+        }
+            geo_json_d6ef04912d7903c24d97e5c92bd0f9d7_add({"features": [{"geometry": {"coordinates": [[13.43909, 52.490476], [13.439562, 52.489562], [13.439906, 52.488281], [13.440335, 52.487471], [13.440914, 52.486857], [13.443038, 52.485694], [13.45778, 52.478115], [13.458488, 52.477409], [13.457844, 52.473488], [13.457222, 52.470743], [13.456621, 52.469776], [13.454926, 52.467658], [13.454014, 52.46639], [13.453317, 52.465789], [13.452737, 52.464782], [13.452737, 52.464089], [13.45293, 52.4632], [13.456256, 52.459344]], "type": "LineString"}, "properties": {"end": "Landwehrkanal", "start": "Hafen Britz Ost", "waterbody": ""}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_d6ef04912d7903c24d97e5c92bd0f9d7.bindTooltip(
+                `<div>
+                      | 4.2 km
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_3df6a37c64653c9a383f63d71dbf672f = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_71df46e40daf46689e97a8894274de51 = $(`<div id="html_71df46e40daf46689e97a8894274de51" style="width: 100.0%; height: 100.0%;"><strong>Start:</strong> Hafen Britz Ost<br><strong>End:</strong> Landwehrkanal<br><strong>Length:</strong> 4.16 km</div>`)[0];
+                popup_3df6a37c64653c9a383f63d71dbf672f.setContent(html_71df46e40daf46689e97a8894274de51);
+            
+        
+
+        geo_json_d6ef04912d7903c24d97e5c92bd0f9d7.bindPopup(popup_3df6a37c64653c9a383f63d71dbf672f)
+        ;
+
+        
+    
+    
+        function geo_json_2ab9e3fa844f2edffbf84482a90a6c16_styler(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {};
+            }
+        }
+        function geo_json_2ab9e3fa844f2edffbf84482a90a6c16_highlighter(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {"opacity": 1.0, "weight": 6};
+            }
+        }
+
+        function geo_json_2ab9e3fa844f2edffbf84482a90a6c16_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        geo_json_2ab9e3fa844f2edffbf84482a90a6c16.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_2ab9e3fa844f2edffbf84482a90a6c16_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_2ab9e3fa844f2edffbf84482a90a6c16 = L.geoJson(null, {
+                onEachFeature: geo_json_2ab9e3fa844f2edffbf84482a90a6c16_onEachFeature,
+            
+                style: geo_json_2ab9e3fa844f2edffbf84482a90a6c16_styler,
+        });
+
+        function geo_json_2ab9e3fa844f2edffbf84482a90a6c16_add (data) {
+            geo_json_2ab9e3fa844f2edffbf84482a90a6c16
+                .addData(data)
+                .addTo(feature_group_a06e64d95265bd1daa97908bdde6c615);
+        }
+            geo_json_2ab9e3fa844f2edffbf84482a90a6c16_add({"features": [{"geometry": {"coordinates": [[13.575432, 52.428777], [13.574917, 52.430531], [13.574188, 52.432127], [13.5726, 52.433579], [13.572922, 52.434861], [13.574317, 52.43579], [13.575668, 52.436797], [13.575325, 52.438275], [13.574317, 52.439609], [13.572729, 52.441022], [13.571484, 52.442082], [13.571355, 52.443782], [13.571742, 52.444776], [13.572299, 52.446202], [13.572745, 52.448085]], "type": "LineString"}, "properties": {"end": "K\u00f6penick", "start": "Teltowkanal", "waterbody": "Dahme"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_2ab9e3fa844f2edffbf84482a90a6c16.bindTooltip(
+                `<div>
+                     Dahme | 2.4 km
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_72ecf4aca16aaaf173af8db14b2a0f45 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_00bad9403fadcfc880e415a9ef5b37a6 = $(`<div id="html_00bad9403fadcfc880e415a9ef5b37a6" style="width: 100.0%; height: 100.0%;"><strong>Start:</strong> Teltowkanal<br><strong>End:</strong> Köpenick<br><strong>Length:</strong> 2.35 km</div>`)[0];
+                popup_72ecf4aca16aaaf173af8db14b2a0f45.setContent(html_00bad9403fadcfc880e415a9ef5b37a6);
+            
+        
+
+        geo_json_2ab9e3fa844f2edffbf84482a90a6c16.bindPopup(popup_72ecf4aca16aaaf173af8db14b2a0f45)
+        ;
+
+        
+    
+    
+        function geo_json_0ff481525d7cca279bfb281d41d155c1_styler(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {};
+            }
+        }
+        function geo_json_0ff481525d7cca279bfb281d41d155c1_highlighter(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {"opacity": 1.0, "weight": 6};
+            }
+        }
+
+        function geo_json_0ff481525d7cca279bfb281d41d155c1_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        geo_json_0ff481525d7cca279bfb281d41d155c1.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_0ff481525d7cca279bfb281d41d155c1_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_0ff481525d7cca279bfb281d41d155c1 = L.geoJson(null, {
+                onEachFeature: geo_json_0ff481525d7cca279bfb281d41d155c1_onEachFeature,
+            
+                style: geo_json_0ff481525d7cca279bfb281d41d155c1_styler,
+        });
+
+        function geo_json_0ff481525d7cca279bfb281d41d155c1_add (data) {
+            geo_json_0ff481525d7cca279bfb281d41d155c1
+                .addData(data)
+                .addTo(feature_group_a06e64d95265bd1daa97908bdde6c615);
+        }
+            geo_json_0ff481525d7cca279bfb281d41d155c1_add({"features": [{"geometry": {"coordinates": [[13.659976, 52.378704], [13.655963, 52.3767], [13.653667, 52.37497], [13.649955, 52.371839], [13.648582, 52.368551], [13.641586, 52.358462], [13.641329, 52.355841], [13.636007, 52.346614], [13.63781, 52.343677], [13.639612, 52.341422]], "type": "LineString"}, "properties": {"end": "Schm\u00f6ckwitz", "start": "Zeuthen", "waterbody": "Dahme (Zeuthener See)"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_0ff481525d7cca279bfb281d41d155c1.bindTooltip(
+                `<div>
+                     Dahme (Zeuthener See) | 4.6 km
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_083e3bfa656efd0db824676fff85053d = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_61bad28bcabcd3841c275e997d420eae = $(`<div id="html_61bad28bcabcd3841c275e997d420eae" style="width: 100.0%; height: 100.0%;"><strong>Start:</strong> Zeuthen<br><strong>End:</strong> Schmöckwitz<br><strong>Length:</strong> 4.64 km</div>`)[0];
+                popup_083e3bfa656efd0db824676fff85053d.setContent(html_61bad28bcabcd3841c275e997d420eae);
+            
+        
+
+        geo_json_0ff481525d7cca279bfb281d41d155c1.bindPopup(popup_083e3bfa656efd0db824676fff85053d)
+        ;
+
+        
+    
+    
+        function geo_json_1ad9a24a51b5b84bccefc033af63c0e5_styler(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {};
+            }
+        }
+        function geo_json_1ad9a24a51b5b84bccefc033af63c0e5_highlighter(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {"opacity": 1.0, "weight": 6};
+            }
+        }
+
+        function geo_json_1ad9a24a51b5b84bccefc033af63c0e5_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        geo_json_1ad9a24a51b5b84bccefc033af63c0e5.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_1ad9a24a51b5b84bccefc033af63c0e5_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_1ad9a24a51b5b84bccefc033af63c0e5 = L.geoJson(null, {
+                onEachFeature: geo_json_1ad9a24a51b5b84bccefc033af63c0e5_onEachFeature,
+            
+                style: geo_json_1ad9a24a51b5b84bccefc033af63c0e5_styler,
+        });
+
+        function geo_json_1ad9a24a51b5b84bccefc033af63c0e5_add (data) {
+            geo_json_1ad9a24a51b5b84bccefc033af63c0e5
+                .addData(data)
+                .addTo(feature_group_a06e64d95265bd1daa97908bdde6c615);
+        }
+            geo_json_1ad9a24a51b5b84bccefc033af63c0e5_add({"features": [{"geometry": {"coordinates": [[13.640041, 52.341317], [13.646822, 52.339115], [13.648882, 52.339167], [13.655577, 52.346561], [13.663044, 52.354268], [13.664932, 52.357256], [13.666992, 52.357833], [13.677979, 52.365433], [13.688809, 52.366386], [13.692291, 52.366976], [13.693278, 52.367801], [13.693181, 52.368486], [13.693165, 52.369082], [13.693707, 52.369498], [13.695236, 52.370484], [13.69625, 52.371204], [13.69647, 52.371424], [13.6967, 52.371718], [13.697419, 52.372056], [13.698122, 52.372301], [13.699651, 52.372734], [13.701566, 52.372838], [13.702751, 52.373176]], "type": "LineString"}, "properties": {"end": "Zeuthen", "start": "Schleuse Wernsdorf", "waterbody": "Krossinsee"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_1ad9a24a51b5b84bccefc033af63c0e5.bindTooltip(
+                `<div>
+                     Krossinsee | 6.3 km
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_296e4f1a10f2d6d6780774dc45575f87 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_58260309e29e78340a3e15b84af31906 = $(`<div id="html_58260309e29e78340a3e15b84af31906" style="width: 100.0%; height: 100.0%;"><strong>Start:</strong> Schleuse Wernsdorf<br><strong>End:</strong> Zeuthen<br><strong>Length:</strong> 6.32 km</div>`)[0];
+                popup_296e4f1a10f2d6d6780774dc45575f87.setContent(html_58260309e29e78340a3e15b84af31906);
+            
+        
+
+        geo_json_1ad9a24a51b5b84bccefc033af63c0e5.bindPopup(popup_296e4f1a10f2d6d6780774dc45575f87)
+        ;
+
+        
+    
+    
+        function geo_json_1deef4c8c36676ea022e648270ecf8c2_styler(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {};
+            }
+        }
+        function geo_json_1deef4c8c36676ea022e648270ecf8c2_highlighter(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {"opacity": 1.0, "weight": 6};
+            }
+        }
+
+        function geo_json_1deef4c8c36676ea022e648270ecf8c2_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        geo_json_1deef4c8c36676ea022e648270ecf8c2.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_1deef4c8c36676ea022e648270ecf8c2_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_1deef4c8c36676ea022e648270ecf8c2 = L.geoJson(null, {
+                onEachFeature: geo_json_1deef4c8c36676ea022e648270ecf8c2_onEachFeature,
+            
+                style: geo_json_1deef4c8c36676ea022e648270ecf8c2_styler,
+        });
+
+        function geo_json_1deef4c8c36676ea022e648270ecf8c2_add (data) {
+            geo_json_1deef4c8c36676ea022e648270ecf8c2
+                .addData(data)
+                .addTo(feature_group_a06e64d95265bd1daa97908bdde6c615);
+        }
+            geo_json_1deef4c8c36676ea022e648270ecf8c2_add({"features": [{"geometry": {"coordinates": [[13.702676, 52.373372], [13.697891, 52.374538], [13.688772, 52.375927], [13.681262, 52.377276], [13.677721, 52.377695], [13.674046, 52.378242], [13.669009, 52.378206], [13.66461, 52.377931], [13.660684, 52.378481]], "type": "LineString"}, "properties": {"end": "Schm\u00f6ckwitz", "start": "Schleuse Wernsdorf", "waterbody": "Oder-Spree-Kanal"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_1deef4c8c36676ea022e648270ecf8c2.bindTooltip(
+                `<div>
+                     Oder-Spree-Kanal | 2.9 km
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_cab6c551ba309db50b43a09c4068473f = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_6186890186227774550e00266c2b78a8 = $(`<div id="html_6186890186227774550e00266c2b78a8" style="width: 100.0%; height: 100.0%;"><strong>Start:</strong> Schleuse Wernsdorf<br><strong>End:</strong> Schmöckwitz<br><strong>Length:</strong> 2.95 km</div>`)[0];
+                popup_cab6c551ba309db50b43a09c4068473f.setContent(html_6186890186227774550e00266c2b78a8);
+            
+        
+
+        geo_json_1deef4c8c36676ea022e648270ecf8c2.bindPopup(popup_cab6c551ba309db50b43a09c4068473f)
+        ;
+
+        
+    
+    
+        function geo_json_17103338bdd48f72bd3b7df338ed88ba_styler(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {};
+            }
+        }
+        function geo_json_17103338bdd48f72bd3b7df338ed88ba_highlighter(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {"opacity": 1.0, "weight": 6};
+            }
+        }
+
+        function geo_json_17103338bdd48f72bd3b7df338ed88ba_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        geo_json_17103338bdd48f72bd3b7df338ed88ba.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_17103338bdd48f72bd3b7df338ed88ba_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_17103338bdd48f72bd3b7df338ed88ba = L.geoJson(null, {
+                onEachFeature: geo_json_17103338bdd48f72bd3b7df338ed88ba_onEachFeature,
+            
+                style: geo_json_17103338bdd48f72bd3b7df338ed88ba_styler,
+        });
+
+        function geo_json_17103338bdd48f72bd3b7df338ed88ba_add (data) {
+            geo_json_17103338bdd48f72bd3b7df338ed88ba
+                .addData(data)
+                .addTo(feature_group_a06e64d95265bd1daa97908bdde6c615);
+        }
+            geo_json_17103338bdd48f72bd3b7df338ed88ba_add({"features": [{"geometry": {"coordinates": [[13.575271, 52.42865], [13.572659, 52.428192], [13.548374, 52.425179], [13.544619, 52.425075], [13.526444, 52.426043], [13.516338, 52.426619], [13.509128, 52.427888], [13.504536, 52.429955], [13.497584, 52.433396], [13.478487, 52.442605], [13.466406, 52.448399], [13.463466, 52.450138], [13.462565, 52.451053], [13.460312, 52.454074], [13.456321, 52.459043]], "type": "LineString"}, "properties": {"end": "Hafen Britz Ost", "start": "Dahme", "waterbody": "Teltowkanal"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_17103338bdd48f72bd3b7df338ed88ba.bindTooltip(
+                `<div>
+                     Teltowkanal | 9.6 km
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_a18e17f089f74693d1ded4614ea37c13 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_b66d29ff4b5c29e11d5dd27b714920bb = $(`<div id="html_b66d29ff4b5c29e11d5dd27b714920bb" style="width: 100.0%; height: 100.0%;"><strong>Start:</strong> Dahme<br><strong>End:</strong> Hafen Britz Ost<br><strong>Length:</strong> 9.65 km</div>`)[0];
+                popup_a18e17f089f74693d1ded4614ea37c13.setContent(html_b66d29ff4b5c29e11d5dd27b714920bb);
+            
+        
+
+        geo_json_17103338bdd48f72bd3b7df338ed88ba.bindPopup(popup_a18e17f089f74693d1ded4614ea37c13)
+        ;
+
+        
+    
+    
+        function geo_json_099d3dd4fbb84b62853bc7ce141d6e02_styler(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {"dashArray": "5, 10"};
+            }
+        }
+        function geo_json_099d3dd4fbb84b62853bc7ce141d6e02_highlighter(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {"opacity": 1.0, "weight": 6};
+            }
+        }
+
+        function geo_json_099d3dd4fbb84b62853bc7ce141d6e02_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        geo_json_099d3dd4fbb84b62853bc7ce141d6e02.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_099d3dd4fbb84b62853bc7ce141d6e02_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_099d3dd4fbb84b62853bc7ce141d6e02 = L.geoJson(null, {
+                onEachFeature: geo_json_099d3dd4fbb84b62853bc7ce141d6e02_onEachFeature,
+            
+                style: geo_json_099d3dd4fbb84b62853bc7ce141d6e02_styler,
+        });
+
+        function geo_json_099d3dd4fbb84b62853bc7ce141d6e02_add (data) {
+            geo_json_099d3dd4fbb84b62853bc7ce141d6e02
+                .addData(data)
+                .addTo(feature_group_a06e64d95265bd1daa97908bdde6c615);
+        }
+            geo_json_099d3dd4fbb84b62853bc7ce141d6e02_add({"features": [{"geometry": {"coordinates": [[13.58158, 52.446574], [13.580915, 52.445894], [13.580368, 52.445613], [13.579295, 52.445129], [13.578565, 52.444815], [13.577809, 52.444488], [13.576328, 52.443978], [13.575631, 52.443618], [13.574992, 52.442964], [13.574483, 52.442415], [13.573431, 52.440711]], "type": "LineString"}, "properties": {"end": "Dahme", "sidetrack": true, "start": "Spree", "waterbody": "Kietzer Graben"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_099d3dd4fbb84b62853bc7ce141d6e02.bindTooltip(
+                `<div>
+                     Kietzer Graben | 0.9 km
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_b66a4668283ba71861fd530b31f3e5ba = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_fe2a63cc6df6ad0955ae97591944f9a9 = $(`<div id="html_fe2a63cc6df6ad0955ae97591944f9a9" style="width: 100.0%; height: 100.0%;"><strong>Start:</strong> Spree<br><strong>End:</strong> Dahme<br><strong>Length:</strong> 0.89 km</div>`)[0];
+                popup_b66a4668283ba71861fd530b31f3e5ba.setContent(html_fe2a63cc6df6ad0955ae97591944f9a9);
+            
+        
+
+        geo_json_099d3dd4fbb84b62853bc7ce141d6e02.bindPopup(popup_b66a4668283ba71861fd530b31f3e5ba)
+        ;
+
+        
+    
+    
+        function geo_json_cab06c0403d7e47b7e7b48fd087f020a_styler(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {"dashArray": "5, 10"};
+            }
+        }
+        function geo_json_cab06c0403d7e47b7e7b48fd087f020a_highlighter(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {"opacity": 1.0, "weight": 6};
+            }
+        }
+
+        function geo_json_cab06c0403d7e47b7e7b48fd087f020a_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        geo_json_cab06c0403d7e47b7e7b48fd087f020a.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_cab06c0403d7e47b7e7b48fd087f020a_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_cab06c0403d7e47b7e7b48fd087f020a = L.geoJson(null, {
+                onEachFeature: geo_json_cab06c0403d7e47b7e7b48fd087f020a_onEachFeature,
+            
+                style: geo_json_cab06c0403d7e47b7e7b48fd087f020a_styler,
+        });
+
+        function geo_json_cab06c0403d7e47b7e7b48fd087f020a_add (data) {
+            geo_json_cab06c0403d7e47b7e7b48fd087f020a
+                .addData(data)
+                .addTo(feature_group_a06e64d95265bd1daa97908bdde6c615);
+        }
+            geo_json_cab06c0403d7e47b7e7b48fd087f020a_add({"features": [{"geometry": {"coordinates": [[13.487563, 52.488804], [13.487284, 52.489562], [13.486673, 52.490261], [13.485374, 52.491117], [13.483776, 52.491953], [13.483196, 52.492253], [13.482027, 52.492946], [13.480911, 52.49371], [13.480139, 52.494474], [13.478165, 52.495689], [13.476319, 52.497048], [13.474302, 52.498537]], "type": "LineString"}, "properties": {"end": "Rummelsburger Bucht", "sidetrack": true, "start": "Spree"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_cab06c0403d7e47b7e7b48fd087f020a.bindTooltip(
+                `<div>
+                      | 1.4 km
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_c115e7f660d5de55f0512b2f3c59382d = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_78a513b946e5177d7a7fb36c7afc3380 = $(`<div id="html_78a513b946e5177d7a7fb36c7afc3380" style="width: 100.0%; height: 100.0%;"><strong>Start:</strong> Spree<br><strong>End:</strong> Rummelsburger Bucht<br><strong>Length:</strong> 1.43 km</div>`)[0];
+                popup_c115e7f660d5de55f0512b2f3c59382d.setContent(html_78a513b946e5177d7a7fb36c7afc3380);
+            
+        
+
+        geo_json_cab06c0403d7e47b7e7b48fd087f020a.bindPopup(popup_c115e7f660d5de55f0512b2f3c59382d)
+        ;
+
+        
+    
+    
+        function geo_json_45dba9b2c72ae4ba1af644317b97efda_styler(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {"dashArray": "5, 10"};
+            }
+        }
+        function geo_json_45dba9b2c72ae4ba1af644317b97efda_highlighter(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {"opacity": 1.0, "weight": 6};
+            }
+        }
+
+        function geo_json_45dba9b2c72ae4ba1af644317b97efda_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        geo_json_45dba9b2c72ae4ba1af644317b97efda.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_45dba9b2c72ae4ba1af644317b97efda_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_45dba9b2c72ae4ba1af644317b97efda = L.geoJson(null, {
+                onEachFeature: geo_json_45dba9b2c72ae4ba1af644317b97efda_onEachFeature,
+            
+                style: geo_json_45dba9b2c72ae4ba1af644317b97efda_styler,
+        });
+
+        function geo_json_45dba9b2c72ae4ba1af644317b97efda_add (data) {
+            geo_json_45dba9b2c72ae4ba1af644317b97efda
+                .addData(data)
+                .addTo(feature_group_a06e64d95265bd1daa97908bdde6c615);
+        }
+            geo_json_45dba9b2c72ae4ba1af644317b97efda_add({"features": [{"geometry": {"coordinates": [[13.696185, 52.429634], [13.696357, 52.429788], [13.697006, 52.429896], [13.697296, 52.429978], [13.697628, 52.430275], [13.698149, 52.430374], [13.699147, 52.430397], [13.700075, 52.430387], [13.701748, 52.430233], [13.702778, 52.430089], [13.703519, 52.429804], [13.704876, 52.429435], [13.706287, 52.42916], [13.707451, 52.429029], [13.708105, 52.429036], [13.708781, 52.429137], [13.709221, 52.429042], [13.710229, 52.427891], [13.710852, 52.426949], [13.711184, 52.426412], [13.71164, 52.425961]], "type": "LineString"}, "properties": {"end": "Spree", "sidetrack": true, "start": "Spree", "waterbody": "Neu-Venedig"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_45dba9b2c72ae4ba1af644317b97efda.bindTooltip(
+                `<div>
+                     Neu-Venedig | 1.3 km
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_1d59b0f6f014da296e4c263ff1ba5356 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_6dc375911bd561fba475ce3525e20a2f = $(`<div id="html_6dc375911bd561fba475ce3525e20a2f" style="width: 100.0%; height: 100.0%;"><strong>Start:</strong> Spree<br><strong>End:</strong> Spree<br><strong>Length:</strong> 1.33 km</div>`)[0];
+                popup_1d59b0f6f014da296e4c263ff1ba5356.setContent(html_6dc375911bd561fba475ce3525e20a2f);
+            
+        
+
+        geo_json_45dba9b2c72ae4ba1af644317b97efda.bindPopup(popup_1d59b0f6f014da296e4c263ff1ba5356)
+        ;
+
+        
+    
+    
+        function geo_json_77ec14cbb3a80deb43701c2488814b7a_styler(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {"dashArray": "5, 10"};
+            }
+        }
+        function geo_json_77ec14cbb3a80deb43701c2488814b7a_highlighter(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {"opacity": 1.0, "weight": 6};
+            }
+        }
+
+        function geo_json_77ec14cbb3a80deb43701c2488814b7a_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        geo_json_77ec14cbb3a80deb43701c2488814b7a.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_77ec14cbb3a80deb43701c2488814b7a_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_77ec14cbb3a80deb43701c2488814b7a = L.geoJson(null, {
+                onEachFeature: geo_json_77ec14cbb3a80deb43701c2488814b7a_onEachFeature,
+            
+                style: geo_json_77ec14cbb3a80deb43701c2488814b7a_styler,
+        });
+
+        function geo_json_77ec14cbb3a80deb43701c2488814b7a_add (data) {
+            geo_json_77ec14cbb3a80deb43701c2488814b7a
+                .addData(data)
+                .addTo(feature_group_a06e64d95265bd1daa97908bdde6c615);
+        }
+            geo_json_77ec14cbb3a80deb43701c2488814b7a_add({"features": [{"geometry": {"coordinates": [[13.703551, 52.42987], [13.704012, 52.431155], [13.704511, 52.432467], [13.70612, 52.432225], [13.71038, 52.431535], [13.711136, 52.431289], [13.711801, 52.430851], [13.711908, 52.430302], [13.711839, 52.429059], [13.711796, 52.42864], [13.711367, 52.42831], [13.710417, 52.427744]], "type": "LineString"}, "properties": {"end": "Spree", "sidetrack": true, "start": "Spree", "waterbody": "Neu-Venedig"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_77ec14cbb3a80deb43701c2488814b7a.bindTooltip(
+                `<div>
+                     Neu-Venedig | 1.2 km
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_40c9fbccdd7522be22f03366b0fe7b38 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_30cab2157099e9e8a7a550374b552f77 = $(`<div id="html_30cab2157099e9e8a7a550374b552f77" style="width: 100.0%; height: 100.0%;"><strong>Start:</strong> Spree<br><strong>End:</strong> Spree<br><strong>Length:</strong> 1.22 km</div>`)[0];
+                popup_40c9fbccdd7522be22f03366b0fe7b38.setContent(html_30cab2157099e9e8a7a550374b552f77);
+            
+        
+
+        geo_json_77ec14cbb3a80deb43701c2488814b7a.bindPopup(popup_40c9fbccdd7522be22f03366b0fe7b38)
+        ;
+
+        
+    
+    
+        function geo_json_91ff392f520e4be23865daf462d34dc8_styler(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {"dashArray": "5, 10"};
+            }
+        }
+        function geo_json_91ff392f520e4be23865daf462d34dc8_highlighter(feature) {
+            switch(feature.properties.start) {
+                default:
+                    return {"opacity": 1.0, "weight": 6};
+            }
+        }
+
+        function geo_json_91ff392f520e4be23865daf462d34dc8_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        geo_json_91ff392f520e4be23865daf462d34dc8.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_91ff392f520e4be23865daf462d34dc8_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_91ff392f520e4be23865daf462d34dc8 = L.geoJson(null, {
+                onEachFeature: geo_json_91ff392f520e4be23865daf462d34dc8_onEachFeature,
+            
+                style: geo_json_91ff392f520e4be23865daf462d34dc8_styler,
+        });
+
+        function geo_json_91ff392f520e4be23865daf462d34dc8_add (data) {
+            geo_json_91ff392f520e4be23865daf462d34dc8
+                .addData(data)
+                .addTo(feature_group_a06e64d95265bd1daa97908bdde6c615);
+        }
+            geo_json_91ff392f520e4be23865daf462d34dc8_add({"features": [{"geometry": {"coordinates": [[13.580647, 52.447398], [13.580604, 52.448033], [13.580453, 52.449144], [13.579949, 52.450118], [13.578833, 52.450818], [13.577374, 52.451263], [13.57569, 52.451217], [13.574402, 52.450995], [13.574295, 52.450249], [13.574703, 52.449491], [13.575304, 52.448673]], "type": "LineString"}, "properties": {"end": "Spree", "sidetrack": true, "start": "Spree", "waterbody": "Alte Spree"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_91ff392f520e4be23865daf462d34dc8.bindTooltip(
+                `<div>
+                     Alte Spree | 1.0 km
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_f87f800d105b7a94b577aec7eb0c331f = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_80f8d655317311991b039abfc5359510 = $(`<div id="html_80f8d655317311991b039abfc5359510" style="width: 100.0%; height: 100.0%;"><strong>Start:</strong> Spree<br><strong>End:</strong> Spree<br><strong>Length:</strong> 1.01 km</div>`)[0];
+                popup_f87f800d105b7a94b577aec7eb0c331f.setContent(html_80f8d655317311991b039abfc5359510);
+            
+        
+
+        geo_json_91ff392f520e4be23865daf462d34dc8.bindPopup(popup_f87f800d105b7a94b577aec7eb0c331f)
+        ;
+
+        
+    
+    
+            var locate_control_9baec6607adfa22f475ca25a77cd5e84 = L.control.locate(
+                {}
+            ).addTo(map_49e4a1671df759a36b1bf7d0e4e3b43a);
+            
+        
+    
+            var layer_control_a801d282ee68d3d03463ca4f482a10ef = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_a23c38a5407d44c3ae3015841cb7e7c4,
+                },
+                overlays :  {
+                    "Launch Points with Public Transport" : feature_group_6f4425b77f2b9c4dad81d90ce41162c6,
+                    "Launch Points without Public Transport" : feature_group_a33273ab8841e7863a209b04d09edce4,
+                    "Resting Points" : feature_group_5f52716409888e38342043973681e6e1,
+                    "Paddel Routes" : feature_group_a06e64d95265bd1daa97908bdde6c615,
+                },
+            };
+            L.control.layers(
+                layer_control_a801d282ee68d3d03463ca4f482a10ef.base_layers,
+                layer_control_a801d282ee68d3d03463ca4f482a10ef.overlays,
+                {"autoZIndex": true, "collapsed": true, "position": "topright"}
+            ).addTo(map_49e4a1671df759a36b1bf7d0e4e3b43a);
+        
+</script>
+</html>
