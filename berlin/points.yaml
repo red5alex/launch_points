@@ -1,0 +1,30 @@
+- name: "Anleger Rummelsburger Bucht"
+  coordinates:
+    lon: 13.480600
+    lat: 52.495601
+  waterbody: "Rummelsburger Bucht"
+  public_transport: 
+    - stop: "Kosanke-Siedlung"
+      distance_m: 450
+      lines: ["Tram 21"]
+  vehicle_parking:
+    - type: kerfside
+      distance_m: 100
+  type: jetty  # jetty, beach, ...
+  accessibility:
+    # excellent, good, moderate, poor
+    waterside: good
+    landside: excellent
+    setup_area: excellent
+  access:
+    type: jetty
+    height_cm: 35 
+  amenities: []  # toilet, food, ...
+  pictures:
+    - file: "figs/anleger_rummelsburg_waterside.jpg"
+      # title: Anleger Rummelsburger
+      # decription:
+      # license:
+      # author:
+    
+    
