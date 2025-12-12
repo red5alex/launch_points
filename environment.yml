@@ -1,0 +1,25 @@
+name: launch_points
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pandas>=1.5
+  - folium>=0.14
+  - geopy>=2.3
+  - jupyterlab>=4.0
+  - notebook>=6.5
+  - ipykernel
+  - numpy>=1.23
+  - pip
+  - pip:
+    - branca>=0.8
+    - python-dateutil>=2.8.2
+    - matplotlib>=3.7
+    - requests>=2.31
+    - pytest>=7.0  # optional, useful if you add tests
+
+# Notes:
+# - This file is intentionally permissive on minor versions to reduce solver conflicts.
+# - For reproducibility, create a lockfile: `conda env export --no-builds > environment.lock.yml`
+#   or use `conda-lock` to generate a cross-platform lockfile.
