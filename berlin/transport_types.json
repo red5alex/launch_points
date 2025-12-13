@@ -1,0 +1,7 @@
+{
+  "train": {"name": "Bahn", "icon": "fa-solid fa-train"},
+  "tram": {"name": "Tram", "icon": "fa-solid fa-train-tram"},
+  "bus": {"name": "Bus", "icon": "fa-solid fa-bus"},
+  "ferry": {"name": "Fähre", "icon": "fa-solid fa-ship"},
+  "metro": {"name": "U-Bahn", "icon": "fa-solid fa-subway"}
+}
