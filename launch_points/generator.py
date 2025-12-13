@@ -83,6 +83,7 @@ def generate_map(
     output_editor: str = "berlin/editor.html",
     center: Tuple[float, float] = (52.5200, 13.4050),
     zoom_start: int = 11,
+    transport_config: str = "berlin/transport_types.json",
 ):
     """Generate a folium map from marker CSVs and GeoJSON routes.
 
@@ -102,6 +103,15 @@ def generate_map(
         all_markers = pd.DataFrame()
 
     my_map = folium.Map(location=list(center), zoom_start=zoom_start, tiles="OpenStreetMap")
+
+    # Load transport type config
+    transport_types = {}
+    if os.path.exists(transport_config):
+        try:
+            with open(transport_config, "r", encoding="utf-8") as f:
+                transport_types = json.load(f)
+        except Exception:
+            LOGGER.warning("Failed to load transport types config %s", transport_config)
 
     # Feature groups
     layers = {
@@ -219,12 +229,10 @@ def generate_map(
             # compute path length and add as tooltip to the path
             line_length = calculate_length(coords)
             # choose icon class (Font Awesome 6 style) and color
-            icon_classes = {
-                "train": "fa-solid fa-train",
-                "tram": "fa-solid fa-train-tram",
-                "bus": "fa-solid fa-bus",
-            }
-            icon_class = icon_classes.get(station_type, "fa-solid fa-bus")
+            # Choose icon class from config if available
+            icon_class = "fa-solid fa-bus"
+            if station_type in transport_types and isinstance(transport_types[station_type], dict):
+                icon_class = transport_types[station_type].get("icon", icon_class)
             color = "#4a4a4a"
 
             station_popup = folium.Popup(f"<strong>{station_name}</strong><br>Type: {station_type}", max_width=300)
@@ -268,7 +276,25 @@ def validate_geojson(path: str) -> bool:
     return True
 
 
-def validate_station_paths(path: str) -> bool:
+def load_transport_types(path: str = "berlin/transport_types.json") -> dict:
+    """Load a transport types JSON mapping.
+
+    Returns a dict mapping station_type key to an object with keys 'name' and 'icon'.
+    If the file isn't present or fails to load, returns an empty dict.
+    """
+    if not os.path.exists(path):
+        return {}
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            if isinstance(data, dict):
+                return data
+    except Exception:
+        LOGGER.warning("Failed to load transport types from %s", path)
+    return {}
+
+
+def validate_station_paths(path: str, transport_config: str = "berlin/transport_types.json") -> bool:
     """Validate optional station paths GeoJSON.
 
     Returns True if the file is absent (file is optional) or if present and structurally valid.
@@ -288,6 +314,17 @@ def validate_station_paths(path: str) -> bool:
     if data.get("type") != "FeatureCollection":
         return False
 
+    # Load transport types for validation (optional)
+    allowed_types = set(("train", "tram", "bus"))
+    if os.path.exists(transport_config):
+        try:
+            with open(transport_config, "r", encoding="utf-8") as f:
+                transport_types = json.load(f)
+                if isinstance(transport_types, dict):
+                    allowed_types = set(transport_types.keys())
+        except Exception:
+            pass
+
     for feat in data.get("features", []):
         geom = feat.get("geometry", {})
         if geom.get("type") != "LineString":
@@ -298,7 +335,7 @@ def validate_station_paths(path: str) -> bool:
         props = feat.get("properties", {})
         name = props.get("station_name") or props.get("name")
         stype = (props.get("station_type") or props.get("type") or "").lower()
-        if not name or stype not in ("train", "tram", "bus"):
+        if not name or stype not in allowed_types:
             return False
 
     return True

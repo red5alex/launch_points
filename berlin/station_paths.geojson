@@ -184,7 +184,7 @@
       "type": "Feature",
       "properties": {
         "station_name": "U Prinzenstraße",
-        "station_type": "train"
+        "station_type": "metro"
       },
       "geometry": {
         "type": "LineString",

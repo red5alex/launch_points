@@ -136,6 +136,48 @@ class TestGenerator(unittest.TestCase):
         expected_meters = int(round((expected_length_km * 1000) / 25.0) * 25)
         self.assertIn(f"{expected_meters:.0f} m", html)
 
+    def test_ferry_transport_type_and_icon_from_config(self):
+        import tempfile
+
+        tmpdir = tempfile.mkdtemp()
+        out_index = os.path.join(tmpdir, "index.html")
+        out_editor = os.path.join(tmpdir, "editor.html")
+
+        # Create a small station paths GeoJSON with a ferry station
+        station_geo = os.path.join(tmpdir, "station_paths.geojson")
+        content = {
+            "type": "FeatureCollection",
+            "features": [
+                {
+                    "type": "Feature",
+                    "properties": {"station_name": "Harbor Ferry", "station_type": "ferry"},
+                    "geometry": {"type": "LineString", "coordinates": [[13.4150, 52.5220], [13.4160, 52.5224]]},
+                }
+            ],
+        }
+        with open(station_geo, "w", encoding="utf-8") as f:
+            import json as _json
+
+            f.write(_json.dumps(content))
+
+        markers = [
+            (os.path.join(os.path.dirname(__file__), "..", "berlin", "launch_with_transport.csv"), "launch_with_transport"),
+        ]
+        geojson = os.path.join(os.path.dirname(__file__), "..", "berlin", "routes.geojson")
+        geojson = os.path.abspath(geojson)
+
+        generator.generate_map(markers, geojson, station_paths=station_geo, output_index=out_index, output_editor=out_editor)
+
+        self.assertTrue(os.path.exists(out_index))
+        with open(out_index, "r", encoding="utf-8") as f:
+            html = f.read()
+
+        # 'ferry' is defined in berlin/transport_types.json with 'fa-solid fa-ship'
+        self.assertIn("fa-ship", html)
+        # color and size remain consistent
+        self.assertIn("#4a4a4a", html)
+        self.assertIn("font-size: 20px", html)
+
     def test_example_station_paths_valid(self):
         # Ensure example file included in the repo is valid according to our validator
         path = os.path.join(os.path.dirname(__file__), "..", "berlin", "station_paths.example.geojson")
