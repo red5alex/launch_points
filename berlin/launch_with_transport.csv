@@ -1,13 +1,13 @@
 name,lat,lon,transport,accessibility,picture
-Licht und Luftbad Müggelsee, 52.446309, 13.67013,True,good,figs/launch_lichluftbad.jpg
-Köpenick Anleger, 52.445685, 13.573238,True,moderate,figs/anleger_koepenick.jpg
-Köpenick Alte Spree, 52.451423, 13.575599,True,good,figs/koepenick_alte_spree.jpg
-Müggelpark Friedrichshagen, 52.444109, 13.628138,True,good,figs/mueggelpark.jpg
-Rummelsburger Bucht, 52.495601, 13.4806,True,good,fig/anleger_rummelsburg.jpg
-Bammelecke, 52.405757, 13.623889,True,good,fig/bammelecke.jpg
-Erkner Rathauspark, 52.424548, 13.750307,True,good,fig/rathauspark_erkner.jpg
-Rüdersdorf Mühlenfließbrücke, 52.473959, 13.773428, True, good,fig/ruedersdorf_muehlenfliessbrueck.jpg
-Woltersdorf Schleuse (Mühlenteich), 52.442788, 13.765118, True, good,fig/woltersdorf_schleuse.jpg
-Woltersdorf Schleuse (Flakensee), 52.44167, 13.765638, True, good,fig/woltersdorf_schleuse_sued.jpg
-Kreuzber Urbanhafen, 52.4964, 13.407942, True, good,fig/kreuzberg_urbanhafen.jpg
-Fürstenwalde, 52.362072, 14.054078, True, good,fig/fuerstenwalde_spreeufer.jpg
+Licht und Luftbad Müggelsee, 52.446309, 13.67013,True,good,
+Köpenick Anleger, 52.445685, 13.573238,True,moderate,
+Köpenick Alte Spree, 52.451423, 13.575599,True,good,
+Müggelpark Friedrichshagen, 52.444109, 13.628138,True,good,
+Rummelsburger Bucht, 52.495601, 13.4806,True,good,
+Bammelecke, 52.405757, 13.623889,True,good,figs/bammelecke.jpeg
+Erkner Rathauspark, 52.424548, 13.750307,True,good,
+Rüdersdorf Mühlenfließbrücken, 52.473959, 13.773428, True, good,
+Woltersdorf Schleuse (Mühlenteich), 52.442788, 13.765118, True, good,
+Woltersdorf Schleuse (Flakensee), 52.44167, 13.765638, True, good,
+Kreuzber Urbanhafen, 52.4964, 13.407942, True, good,
+Fürstenwalde, 52.362072, 14.054078, True, good,

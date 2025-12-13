@@ -1,5 +1,5 @@
-name,lat,lon,transport,accessibility, picture
-Badestelle Wernsdorf, 52.363209, 13.694662,False,good,no_pic.png
-Badestelle kleiner Müggelsee, 52.42847, 13.676986,False,good,no_pic.jpg
-Altes Flussbad Oberspree, 52.453561, 13.553041,False,good,no_pic.jpg
-Schleusenkrug/ Zoo, 52.11058, 13.338051, False,good,no_pic.jpg
+name,lat,lon,transport,accessibility,picture
+Badestelle Wernsdorf,52.363209,13.694662,False,good,
+Badestelle kleiner Müggelsee,52.42847,13.676986,False,good,
+Altes Flussbad Oberspree,52.453561,13.553041,False,good,
+Schleusenkrug/ Zoo,52.511082,13.337917, False,good,

@@ -10,3 +10,4 @@ notebook>=6.5
 # Optional helpful packages
 numpy>=1.23
 python-dateutil>=2.8.2
+typer>=0.9
