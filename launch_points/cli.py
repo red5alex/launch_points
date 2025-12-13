@@ -41,6 +41,7 @@ def generate(
     """
     markers = [(p, "launch_with_transport" if "with_transport" in p else ("resting_point" if "resting" in p else "launch_without_transport")) for p in _default_marker_files()]
     geojson = "berlin/routes.geojson"
+    station_paths = "berlin/station_paths.geojson"
 
     if validate_before:
         paths = _default_marker_files()
@@ -64,7 +65,7 @@ def generate(
 
     # Perform generation and show any unexpected errors with full traceback
     try:
-        generator.generate_map(markers, geojson)
+        generator.generate_map(markers, geojson, station_paths=station_paths)
         # Successful generation: report written files to the user
         typer.secho("Map generation complete. Files written to 'berlin/index.html' and 'berlin/editor.html'", fg=typer.colors.GREEN)
         if open_after:
@@ -159,6 +160,15 @@ def validate(
         total_issues += 1
     elif verbose:
         typer.secho(f"GeoJSON file OK: {geojson_path}", fg=typer.colors.GREEN)
+
+    # Validate optional station paths
+    station_paths = "berlin/station_paths.geojson"
+    stations_ok = generator.validate_station_paths(station_paths)
+    if not stations_ok:
+        typer.secho(f"Station paths GeoJSON validation failed: {station_paths}", fg=typer.colors.RED)
+        total_issues += 1
+    elif verbose and os.path.exists(station_paths):
+        typer.secho(f"Station paths file OK: {station_paths}", fg=typer.colors.GREEN)
 
     if total_issues and exit_on_error:
         raise typer.Exit(code=3)

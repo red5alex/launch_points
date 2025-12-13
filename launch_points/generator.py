@@ -78,6 +78,7 @@ def calculate_length(coords: Iterable[Tuple[float, float]]) -> float:
 def generate_map(
     markers_files: Iterable[Tuple[str, str]],
     geojson_path: str,
+    station_paths: str = "berlin/station_paths.geojson",
     output_index: str = "berlin/index.html",
     output_editor: str = "berlin/editor.html",
     center: Tuple[float, float] = (52.5200, 13.4050),
@@ -182,6 +183,62 @@ def generate_map(
     else:
         LOGGER.warning("GeoJSON file not found: %s", geojson_path)
 
+    # Add station paths and station markers (optional)
+    if os.path.exists(station_paths):
+        with open(station_paths, "r", encoding="utf-8") as f:
+            station_data = json.load(f)
+
+        station_layer = folium.FeatureGroup(name="Station Paths", show=True)
+
+        def station_style(feature):
+            # dark grey dotted line
+            return {"color": "#4a4a4a", "dashArray": "1, 6", "weight": 3, "opacity": 0.9, "lineCap": "round"}
+
+        for feature in station_data.get("features", []):
+            geom = feature.get("geometry", {})
+            if geom.get("type") != "LineString":
+                continue
+            coords = geom.get("coordinates", [])
+            if not coords:
+                continue
+
+            # Path will be added below with tooltip showing its length
+
+            # The first vertex denotes the public transport station
+            first = coords[0]
+            try:
+                lon, lat = first
+            except Exception:
+                continue
+
+            props = feature.get("properties", {})
+            # Accept either 'station_name' or 'name'
+            station_name = props.get("station_name") or props.get("name") or "Station"
+            station_type = (props.get("station_type") or props.get("type") or "bus").lower()
+
+            # compute path length and add as tooltip to the path
+            line_length = calculate_length(coords)
+            # choose icon class (Font Awesome 6 style) and color
+            icon_classes = {
+                "train": "fa-solid fa-train",
+                "tram": "fa-solid fa-train-tram",
+                "bus": "fa-solid fa-bus",
+            }
+            icon_class = icon_classes.get(station_type, "fa-solid fa-bus")
+            color = "#4a4a4a"
+
+            station_popup = folium.Popup(f"<strong>{station_name}</strong><br>Type: {station_type}", max_width=300)
+            # Use a DivIcon to allow custom FA class and consistent color
+            # Make the station icon large (approx. 2/3 the size of typical launch point icons)
+            icon_html = f"<i class='{icon_class}' style='color: {color}; font-size: 20px;'></i>"
+            station_icon = folium.DivIcon(html=icon_html)
+            # Include distance in the station tooltip as well
+            station_tooltip = folium.Tooltip(f"{station_name} — {line_length:.2f} km")
+            folium.Marker(location=[lat, lon], popup=station_popup, tooltip=station_tooltip, icon=station_icon).add_to(station_layer)
+            # Add a GeoJson for this feature with a tooltip showing its length
+            folium.GeoJson(data=feature, style_function=station_style, tooltip=folium.Tooltip(f"{line_length:.2f} km")).add_to(station_layer)
+        station_layer.add_to(my_map)
+
     # Add controls
     # Import plugins directly to avoid relying on folium attaching a `plugins`
     # attribute to the top-level package object in some environments.
@@ -205,6 +262,42 @@ def validate_geojson(path: str) -> bool:
     for feat in data.get("features", []):
         if feat.get("geometry", {}).get("type") != "LineString":
             return False
+    return True
+
+
+def validate_station_paths(path: str) -> bool:
+    """Validate optional station paths GeoJSON.
+
+    Returns True if the file is absent (file is optional) or if present and structurally valid.
+    Each feature must be a LineString; properties should include a station name and a station type
+    (accepted types: train, tram, bus) — keys accepted: 'station_name' or 'name', and
+    'station_type' or 'type'.
+    """
+    if not os.path.exists(path):
+        # Station paths are optional
+        return True
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    except Exception:
+        return False
+
+    if data.get("type") != "FeatureCollection":
+        return False
+
+    for feat in data.get("features", []):
+        geom = feat.get("geometry", {})
+        if geom.get("type") != "LineString":
+            return False
+        coords = geom.get("coordinates", [])
+        if not coords or len(coords) < 2:
+            return False
+        props = feat.get("properties", {})
+        name = props.get("station_name") or props.get("name")
+        stype = (props.get("station_type") or props.get("type") or "").lower()
+        if not name or stype not in ("train", "tram", "bus"):
+            return False
+
     return True
 
 

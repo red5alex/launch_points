@@ -1,13 +1,15 @@
 name,lat,lon,transport,accessibility,picture
 Licht und Luftbad Müggelsee, 52.446309, 13.67013,True,good,
 Köpenick Anleger, 52.445685, 13.573238,True,moderate,
-Köpenick Alte Spree, 52.451423, 13.575599,True,good,
+Köpenick Alte Spree, 52.451423, 13.575599,True,good,figs/koepenick_alte_spree.jpeg
 Müggelpark Friedrichshagen, 52.444109, 13.628138,True,good,
 Rummelsburger Bucht, 52.495601, 13.4806,True,good,
-Bammelecke, 52.405757, 13.623889,True,good,figs/bammelecke.jpeg
+Bammelecke, 52.407505, 13.622628,True,good,figs/bammelecke.jpeg
 Erkner Rathauspark, 52.424548, 13.750307,True,good,
 Rüdersdorf Mühlenfließbrücken, 52.473959, 13.773428, True, good,
 Woltersdorf Schleuse (Mühlenteich), 52.442788, 13.765118, True, good,
 Woltersdorf Schleuse (Flakensee), 52.44167, 13.765638, True, good,
-Kreuzber Urbanhafen, 52.4964, 13.407942, True, good,
+Kreuzber Urbanhafen, 52.495849, 13.411286, True, good,
 Fürstenwalde, 52.362072, 14.054078, True, good,
+Berkenbrück Wasserwanderrastplatz, 52.34788, 14.148899, True, good,
+Zeuthen Siegertplatz, 52.348329, 13.633888, True, good,
