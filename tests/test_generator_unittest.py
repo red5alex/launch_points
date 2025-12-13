@@ -80,9 +80,10 @@ class TestGenerator(unittest.TestCase):
             html = f.read()
         # The station name and length should appear in the generated HTML and the dotted line style and color should be present
         self.assertIn("Central Station", html)
-        # Calculate expected length and assert it appears in the HTML tooltip
-        expected_length = generator.calculate_length([[13.4050, 52.5200], [13.406, 52.5205]])
-        self.assertIn(f"{expected_length:.2f} km", html)
+        # Calculate expected length and assert it appears in the HTML tooltip (in meters)
+        expected_length_km = generator.calculate_length([[13.4050, 52.5200], [13.406, 52.5205]])
+        expected_meters = int(round((expected_length_km * 1000) / 25.0) * 25)
+        self.assertIn(f"{expected_meters:.0f} m", html)
         # Check dotted pattern and dark grey color presence
         self.assertIn("1, 6", html)
         self.assertIn("#4a4a4a", html)
@@ -131,8 +132,9 @@ class TestGenerator(unittest.TestCase):
         self.assertIn("#4a4a4a", html)
         self.assertIn("font-size: 20px", html)
         # ensure distance tooltip text is present and formatted
-        expected_length = generator.calculate_length([[13.4100, 52.5150], [13.4110, 52.5154]])
-        self.assertIn(f"{expected_length:.2f} km", html)
+        expected_length_km = generator.calculate_length([[13.4100, 52.5150], [13.4110, 52.5154]])
+        expected_meters = int(round((expected_length_km * 1000) / 25.0) * 25)
+        self.assertIn(f"{expected_meters:.0f} m", html)
 
     def test_example_station_paths_valid(self):
         # Ensure example file included in the repo is valid according to our validator

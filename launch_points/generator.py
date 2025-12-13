@@ -232,11 +232,14 @@ def generate_map(
             # Make the station icon large (approx. 2/3 the size of typical launch point icons)
             icon_html = f"<i class='{icon_class}' style='color: {color}; font-size: 20px;'></i>"
             station_icon = folium.DivIcon(html=icon_html)
-            # Include distance in the station tooltip as well
-            station_tooltip = folium.Tooltip(f"{station_name} — {line_length:.2f} km")
+            # Include distance in the station tooltip as meters (not km)
+            meters = line_length * 1000.0
+            # Round to nearest 25 meters for walking distances
+            rounded_meters = int(round(meters / 25.0) * 25)
+            station_tooltip = folium.Tooltip(f"{station_name} — {rounded_meters:.0f} m")
             folium.Marker(location=[lat, lon], popup=station_popup, tooltip=station_tooltip, icon=station_icon).add_to(station_layer)
             # Add a GeoJson for this feature with a tooltip showing its length
-            folium.GeoJson(data=feature, style_function=station_style, tooltip=folium.Tooltip(f"{line_length:.2f} km")).add_to(station_layer)
+            folium.GeoJson(data=feature, style_function=station_style, tooltip=folium.Tooltip(f"{rounded_meters:.0f} m")).add_to(station_layer)
         station_layer.add_to(my_map)
 
     # Add controls
