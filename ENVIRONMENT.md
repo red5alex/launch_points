@@ -1,6 +1,6 @@
 # Environment setup (Windows / PowerShell)
 
-Below are quick steps to create a working environment for `update_map.ipynb`.
+Below are quick steps to create a working environment for running the generator and CLI (`launch_points/generator.py` / `launch_points/cli.py`).
 
 ---
 
@@ -20,7 +20,7 @@ pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-3. Start JupyterLab or Notebook:
+3. (Optional) Start JupyterLab or Notebook if you want an interactive REPL for exploring data or debugging:
 
 ```powershell
 jupyter lab    # or: jupyter notebook
