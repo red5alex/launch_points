@@ -2,6 +2,13 @@
 let map;
 let layers = {};
 let selectedSections = new Set();
+// Store marker references by ID for highlighting
+let markerMap = {
+    launchPoints: new Map(),  // id -> marker
+    pois: new Map()            // id -> marker
+};
+let highlightedMarker = null;  // Currently highlighted marker
+let highlightCircle = null;   // Circle overlay for highlighting
 
 document.addEventListener('DOMContentLoaded', function() {
     // Check if map container exists
@@ -106,25 +113,37 @@ function loadGeoJSONLayers() {
                     // Create marker with colored icon
                     const iconUrl = `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-${color}.png`;
                     
-                    return L.marker(latlng, {
-                        icon: L.icon({
-                            iconUrl: iconUrl,
-                            shadowUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-shadow.png',
-                            iconSize: [25, 41],
-                            iconAnchor: [12, 41],
-                            popupAnchor: [1, -34],
-                            shadowSize: [41, 41]
-                        })
+                    const icon = L.icon({
+                        iconUrl: iconUrl,
+                        shadowUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-shadow.png',
+                        iconSize: [25, 41],
+                        iconAnchor: [12, 41],
+                        popupAnchor: [1, -34],
+                        shadowSize: [41, 41]
                     });
+                    
+                    const marker = L.marker(latlng, { icon: icon });
+                    // Store original icon for restoration
+                    marker._originalIcon = icon;
+                    marker._originalIconColor = color;
+                    return marker;
                 },
                 onEachFeature: function(feature, layer) {
                     const props = feature.properties || {};
                     const name = props.name || 'Unnamed';
                     const status = props.status || 'approved';
                     const statusText = status === 'pending' ? ' (Pending)' : '';
+                    const featureId = props.id || feature.id;
+                    
+                    // Store marker reference for highlighting
+                    if (featureId !== null && featureId !== undefined) {
+                        markerMap.launchPoints.set(featureId, layer);
+                    }
+                    
                     layer.bindPopup(`<strong>${name}${statusText}</strong>`);
                     layer.on('click', function() {
-                        loadLaunchPointInfo(props.id || feature.id);
+                        loadLaunchPointInfo(featureId);
+                        highlightMarker('launchPoint', featureId);
                     });
                 }
             });
@@ -199,23 +218,35 @@ function loadGeoJSONLayers() {
                     // Use different icon for POIs, lighter if pending
                     const iconColor = isPending ? '#ff9999' : '#3388ff';
                     
-                    return L.marker(latlng, {
-                        icon: L.divIcon({
-                            className: 'poi-marker',
-                            html: `<i class="fa-solid fa-map-pin" style="color: ${iconColor}; font-size: 24px;"></i>`,
-                            iconSize: [24, 24],
-                            iconAnchor: [12, 24]
-                        })
+                    const icon = L.divIcon({
+                        className: 'poi-marker',
+                        html: `<i class="fa-solid fa-map-pin" style="color: ${iconColor}; font-size: 24px;"></i>`,
+                        iconSize: [24, 24],
+                        iconAnchor: [12, 24]
                     });
+                    
+                    const marker = L.marker(latlng, { icon: icon });
+                    // Store original icon for restoration
+                    marker._originalIcon = icon;
+                    marker._originalIconColor = iconColor;
+                    return marker;
                 },
                 onEachFeature: function(feature, layer) {
                     const name = feature.properties.name;
                     const poiType = feature.properties.poi_type_name || 'POI';
                     const status = feature.properties.status;
                     const statusText = status === 'pending' ? ' (Pending)' : '';
+                    const featureId = feature.properties.id || feature.id;
+                    
+                    // Store marker reference for highlighting
+                    if (featureId !== null && featureId !== undefined) {
+                        markerMap.pois.set(featureId, layer);
+                    }
+                    
                     layer.bindPopup(`<strong>${name}</strong><br>Type: ${poiType}${statusText}`);
                     layer.on('click', function() {
-                        loadPOIInfo(feature.properties.id);
+                        loadPOIInfo(featureId);
+                        highlightMarker('poi', featureId);
                     });
                 }
             }).addTo(layers.pois);
@@ -437,11 +468,108 @@ function loadGeoJSONLayers() {
         .catch(error => console.error('Error loading walk paths:', error));
 }
 
+// Export functions to global scope for onclick handlers
+window.loadLaunchPointInfo = loadLaunchPointInfo;
+window.loadPOIInfo = loadPOIInfo;
+window.highlightMarker = highlightMarker;
+window.clearHighlight = clearHighlight;
+
+function highlightMarker(type, id) {
+    // Clear previous highlight
+    clearHighlight();
+    
+    // Get the marker map based on type
+    const markers = type === 'launchPoint' ? markerMap.launchPoints : markerMap.pois;
+    const marker = markers.get(id);
+    
+    if (!marker) {
+        console.warn(`Marker not found for ${type} ID ${id}`);
+        return;
+    }
+    
+    // Store reference to highlighted marker
+    highlightedMarker = marker;
+    
+    // Get marker position
+    const latlng = marker.getLatLng();
+    if (!latlng) {
+        console.warn('Marker has no position');
+        return;
+    }
+    
+    // Create a circle to highlight the marker
+    highlightCircle = L.circle(latlng, {
+        radius: 100,  // 100 meters radius
+        color: '#ff0000',
+        fillColor: '#ff0000',
+        fillOpacity: 0.2,
+        weight: 3,
+        opacity: 0.8
+    }).addTo(map);
+    
+    // Change marker icon to highlighted version
+    if (marker._originalIcon) {
+        const originalIcon = marker._originalIcon;
+        if (originalIcon.options) {
+            // For launch points with colored markers
+            if (originalIcon.options.iconUrl) {
+                // Create a larger, red version
+                const highlightIcon = L.icon({
+                    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+                    shadowUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-shadow.png',
+                    iconSize: [35, 57],  // Larger size
+                    iconAnchor: [17, 57],
+                    popupAnchor: [1, -34],
+                    shadowSize: [41, 41]
+                });
+                marker.setIcon(highlightIcon);
+            } else if (originalIcon.options.className === 'poi-marker') {
+                // For POIs with divIcon
+                const highlightIcon = L.divIcon({
+                    className: 'poi-marker-highlight',
+                    html: `<i class="fa-solid fa-map-pin" style="color: #ff0000; font-size: 32px; filter: drop-shadow(0 0 4px rgba(255,0,0,0.8));"></i>`,
+                    iconSize: [32, 32],
+                    iconAnchor: [16, 32]
+                });
+                marker.setIcon(highlightIcon);
+            }
+        }
+    }
+    
+    // Pan to marker if it's not fully visible
+    const bounds = map.getBounds();
+    if (!bounds.contains(latlng)) {
+        map.setView(latlng, Math.max(map.getZoom(), 13), { animate: true });
+    }
+    
+    // Open popup if it exists
+    if (marker.getPopup) {
+        marker.openPopup();
+    }
+}
+
+function clearHighlight() {
+    // Restore original marker icon
+    if (highlightedMarker && highlightedMarker._originalIcon) {
+        highlightedMarker.setIcon(highlightedMarker._originalIcon);
+    }
+    
+    // Remove highlight circle
+    if (highlightCircle) {
+        map.removeLayer(highlightCircle);
+        highlightCircle = null;
+    }
+    
+    highlightedMarker = null;
+}
+
 function loadLaunchPointInfo(id) {
     // Load launch point details
     fetch(`/api/launch-point/${id}/`)
         .then(response => response.json())
         .then(data => {
+            // Highlight the marker
+            highlightMarker('launchPoint', id);
             const infoBox = document.getElementById('info-box');
             if (infoBox) {
                 let html = '<div class="info-box-header">';
@@ -532,6 +660,8 @@ function loadPOIInfo(id) {
     fetch(`/api/poi/${id}/`)
         .then(response => response.json())
         .then(data => {
+            // Highlight the marker
+            highlightMarker('poi', id);
             const infoBox = document.getElementById('info-box');
             if (infoBox) {
                 let html = '<div class="info-box-header">';
