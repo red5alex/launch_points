@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load static %}
 
-{% block title %}{% trans "Map" %} - {% trans "Launch Points" %}{% endblock %}
+{% block title %}{% trans "Map" %} - {% trans "PaddleMap" %}{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -47,7 +47,7 @@
     <div class="sidebar" id="sidebar">
         <div class="sidebar-column">
             <div id="route-selection-panel">
-                <h3>{% trans "Route Selection" %}</h3>
+                <h3>{% trans "Tour Planner" %}</h3>
                 <div class="search-radius-widget">
                     <label for="search-radius">{% trans "Search Radius" %}: <span id="radius-display">500 m</span></label>
                     <input type="range" id="search-radius" min="100" max="2000" step="100" value="500">

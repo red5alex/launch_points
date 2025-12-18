@@ -206,9 +206,12 @@ class RouteSectionViewSet(viewsets.ReadOnlyModelViewSet):
         # Remove duplicates
         waypoints = list(set(waypoints))
 
-        # Find nearby launch points and POIs
-        nearby_launch_points = []
-        nearby_pois = []
+        # Find nearby launch points and POIs, grouped by section
+        # Use dictionaries to track best distance for each point
+        launch_points_by_section = {}  # section_id -> list of points
+        pois_by_section = {}  # section_id -> list of points
+        launch_point_best_distance = {}  # point_id -> (section_id, distance)
+        poi_best_distance = {}  # poi_id -> (section_id, distance)
 
         # Get status filter
         status_filter = get_status_filter(request.user)
@@ -228,12 +231,24 @@ class RouteSectionViewSet(viewsets.ReadOnlyModelViewSet):
             ).order_by('distance').distinct()
 
             for lp in nearby_lps:
-                if lp.id not in [n['id'] for n in nearby_launch_points]:
-                    nearby_launch_points.append({
+                distance_m = round(lp.distance.m, 0)
+                # Check if this is the best distance for this launch point
+                if lp.id not in launch_point_best_distance or distance_m < launch_point_best_distance[lp.id][1]:
+                    # Remove from previous section if it was there
+                    if lp.id in launch_point_best_distance:
+                        prev_section_id = launch_point_best_distance[lp.id][0]
+                        if prev_section_id in launch_points_by_section:
+                            launch_points_by_section[prev_section_id] = [
+                                p for p in launch_points_by_section[prev_section_id] if p['id'] != lp.id
+                            ]
+                    # Add to current section
+                    launch_point_best_distance[lp.id] = (section.id, distance_m)
+                    if section.id not in launch_points_by_section:
+                        launch_points_by_section[section.id] = []
+                    launch_points_by_section[section.id].append({
                         'id': lp.id,
                         'name': lp.name,
-                        'distance_meters': round(lp.distance.m, 0),
-                        'nearest_section_id': section.id,
+                        'distance_meters': distance_m,
                         'accessibility': lp.accessibility
                     })
 
@@ -246,13 +261,25 @@ class RouteSectionViewSet(viewsets.ReadOnlyModelViewSet):
             ).order_by('distance').distinct()
 
             for poi in nearby_poi_list:
-                if poi.id not in [n['id'] for n in nearby_pois]:
-                    nearby_pois.append({
+                distance_m = round(poi.distance.m, 0)
+                # Check if this is the best distance for this POI
+                if poi.id not in poi_best_distance or distance_m < poi_best_distance[poi.id][1]:
+                    # Remove from previous section if it was there
+                    if poi.id in poi_best_distance:
+                        prev_section_id = poi_best_distance[poi.id][0]
+                        if prev_section_id in pois_by_section:
+                            pois_by_section[prev_section_id] = [
+                                p for p in pois_by_section[prev_section_id] if p['id'] != poi.id
+                            ]
+                    # Add to current section
+                    poi_best_distance[poi.id] = (section.id, distance_m)
+                    if section.id not in pois_by_section:
+                        pois_by_section[section.id] = []
+                    pois_by_section[section.id].append({
                         'id': poi.id,
                         'name': poi.name,
                         'poi_type': poi.poi_type.name,
-                        'distance_meters': round(poi.distance.m, 0),
-                        'nearest_section_id': section.id
+                        'distance_meters': distance_m
                     })
 
         # Serialize sections
@@ -264,9 +291,18 @@ class RouteSectionViewSet(viewsets.ReadOnlyModelViewSet):
                 {
                     'id': s.id,
                     'name': s.name or f"Section {s.id}",
+                    'waterbody_name': s.waterbody.name if s.waterbody else None,
                     'distance_km': round(s.distance_meters / 1000.0, 2) if s.distance_meters else 0.0,
                     'from_waypoint': s.from_waypoint.name if s.from_waypoint else None,
                     'to_waypoint': s.to_waypoint.name if s.to_waypoint else None,
+                    'launch_points': sorted(
+                        launch_points_by_section.get(s.id, []),
+                        key=lambda x: x['distance_meters']
+                    ),
+                    'pois': sorted(
+                        pois_by_section.get(s.id, []),
+                        key=lambda x: x['distance_meters']
+                    ),
                 }
                 for s in sections
             ],
@@ -278,8 +314,6 @@ class RouteSectionViewSet(viewsets.ReadOnlyModelViewSet):
                 for w in waypoints
             ],
             'total_distance_km': round(total_distance_m / 1000.0, 2),
-            'nearby_launch_points': nearby_launch_points,
-            'nearby_pois': nearby_pois,
             'search_radius_meters': search_radius_meters
         })
 

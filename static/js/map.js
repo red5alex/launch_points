@@ -376,12 +376,13 @@ function loadGeoJSONLayers() {
             }
             L.geoJSON(data, {
                 pointToLayer: function(feature, latlng) {
+                    // Use same style as table waypoint circles: 11px blue circle with thin light grey outline
                     return L.marker(latlng, {
                         icon: L.divIcon({
                             className: 'waypoint-marker',
-                            html: '<i class="fa-solid fa-circle" style="color: #666; font-size: 12px;"></i>',
-                            iconSize: [12, 12],
-                            iconAnchor: [6, 6]
+                            html: '<div style="width: 11px; height: 11px; background-color: #007bff; border: 1px solid #d0d0d0; border-radius: 50%;"></div>',
+                            iconSize: [11, 11],
+                            iconAnchor: [5.5, 5.5]
                         })
                     });
                 },

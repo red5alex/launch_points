@@ -130,27 +130,29 @@ body {
 }
 
 .search-radius-widget {
-    margin-bottom: 20px;
-    padding: 15px;
+    margin-bottom: 15px;
+    padding: 10px;
     background-color: #f8f9fa;
     border-radius: 5px;
 }
 
 .search-radius-widget label {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     font-weight: 500;
-    color: #495057;
+    color: #6c757d;
+    font-size: 0.75rem;  /* Same as waypoint names */
 }
 
 .search-radius-widget #radius-display {
-    font-weight: bold;
-    color: #007bff;
+    font-weight: 500;
+    color: #6c757d;
+    font-size: 0.75rem;  /* Same as waypoint names */
 }
 
 .search-radius-widget input[type="range"] {
     width: 100%;
-    height: 8px;
+    height: 4px;  /* Thinner slider track */
     border-radius: 5px;
     background: #dee2e6;
     outline: none;
@@ -160,35 +162,131 @@ body {
 .search-radius-widget input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 20px;
-    height: 20px;
+    width: 14px;  /* Smaller knob */
+    height: 14px;  /* Smaller knob */
     border-radius: 50%;
-    background: #007bff;
+    background: #6c757d;  /* Grey knob */
     cursor: pointer;
 }
 
 .search-radius-widget input[type="range"]::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
+    width: 14px;  /* Smaller knob */
+    height: 14px;  /* Smaller knob */
     border-radius: 50%;
-    background: #007bff;
+    background: #6c757d;  /* Grey knob */
     cursor: pointer;
     border: none;
 }
 
-.route-sections {
+.route-sections-table {
+    width: 100%;
+    border-collapse: collapse;
     margin-top: 15px;
 }
 
+.route-sections-table tr {
+    border: none;
+}
+
+.waypoint-row {
+    height: 30px;
+}
+
+.waypoint-cell {
+    padding: 5px 0;
+    position: relative;
+    padding-left: 10px;
+}
+
+.waypoint-circle {
+    position: absolute;
+    left: -2.84px;  /* Shifted 2px to the right: was -4.84px, now -2.84px */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 11px;  /* Reduced by 33% from 16px: 16 * 0.67 = 10.72, rounded to 11px */
+    height: 11px;  /* Reduced by 33% from 16px */
+    background-color: #007bff;
+    border: 1px solid #d0d0d0;  /* Very thin light grey outline */
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.waypoint-label {
+    font-size: 0.75rem;
+    color: #6c757d;
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+.section-row {
+    position: relative;
+}
+
+.section-cell {
+    padding: 0;
+    position: relative;
+}
+
 .route-section-item {
-    padding: 10px;
-    margin-bottom: 8px;
+    padding: 10px 25px 10px 10px;  /* Extra right padding for button */
+    margin: 0;
     background-color: #f8f9fa;
     border-left: 3px solid #007bff;
     border-radius: 3px;
     display: flex;
+    flex-direction: column;
+    position: relative;
+    min-height: 60px;  /* Ensure minimum height for blue line visibility */
+}
+
+.section-content {
+    display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-shrink: 0;
+}
+
+/* Blue line only in section rows, not waypoint rows */
+
+.section-cell {
+    position: relative;
+}
+
+.waypoint-cell {
+    position: relative;
+}
+
+.deselect-section-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 6px;
+    padding: 0;
+    transition: background-color 0.2s, transform 0.1s;
+    z-index: 10;
+}
+
+.deselect-section-btn:hover {
+    background-color: #c82333;
+    transform: scale(1.1);
+}
+
+.deselect-section-btn:active {
+    transform: scale(0.95);
+}
+
+.deselect-section-btn i {
+    font-size: 6px;
 }
 
 .route-section-item strong {

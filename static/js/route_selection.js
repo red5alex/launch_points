@@ -242,57 +242,108 @@ function displayRouteInfo(data) {
     
     let html = '';
     
-    // Display route sections
+    // Display route sections using table structure
     if (data.sections && Array.isArray(data.sections) && data.sections.length > 0) {
-        html += '<div class="route-sections">';
-        data.sections.forEach(section => {
-            html += `<div class="route-section-item">
-                <div>
-                    <strong>${section.name || 'Section ' + section.id}</strong>
-                    ${section.from_waypoint ? `<br><small>From: ${section.from_waypoint}</small>` : ''}
-                    ${section.to_waypoint ? `<br><small>To: ${section.to_waypoint}</small>` : ''}
-                </div>
-                <span>${section.distance_km.toFixed(2)} km</span>
-            </div>`;
+        html += '<table class="route-sections-table">';
+        
+        data.sections.forEach((section, index) => {
+            const prevSection = index > 0 ? data.sections[index - 1] : null;
+            const nextSection = index < data.sections.length - 1 ? data.sections[index + 1] : null;
+            
+            // Check if waypoints are shared
+            const topWaypointShared = prevSection && 
+                section.from_waypoint && 
+                prevSection.to_waypoint && 
+                section.from_waypoint === prevSection.to_waypoint;
+            
+            const bottomWaypointShared = nextSection && 
+                section.to_waypoint && 
+                nextSection.from_waypoint && 
+                section.to_waypoint === nextSection.from_waypoint;
+            
+            // Show top waypoint if not shared with previous section
+            if (!topWaypointShared && section.from_waypoint) {
+                html += `<tr class="waypoint-row">
+                    <td class="waypoint-cell">
+                        <div class="waypoint-circle"></div>
+                        <span class="waypoint-label">${section.from_waypoint}</span>
+                    </td>
+                </tr>`;
+            }
+            
+            // Section row
+            const hasLaunchPoints = section.launch_points && section.launch_points.length > 0;
+            const hasPois = section.pois && section.pois.length > 0;
+            
+            html += `<tr class="section-row">
+                <td class="section-cell">
+                    <div class="route-section-item">
+                        <button class="deselect-section-btn" onclick="deselectRouteSection(${section.id})" title="Deselect section">
+                            <i class="fa-solid fa-times"></i>
+                        </button>
+                        <div class="section-content">
+                            <div>
+                                ${section.waterbody_name ? `<strong>${section.waterbody_name}</strong>` : ''}
+                                ${section.name ? `<br><small style="color: #6c757d;">${section.name}</small>` : (section.waterbody_name ? '' : `<br><small style="color: #6c757d;">Section ${section.id}</small>`)}
+                            </div>
+                            <span>${section.distance_km.toFixed(2)} km</span>
+                        </div>`;
+            
+            // Launch points and POIs
+            if (hasLaunchPoints || hasPois) {
+                html += '<div class="section-points" style="margin: 10px 0; padding-left: 10px;">';
+                
+                if (hasLaunchPoints) {
+                    section.launch_points.forEach(point => {
+                        html += `<div onclick="loadLaunchPointInfo(${point.id})" style="cursor: pointer; padding: 5px 0; font-size: 0.9rem; color: #495057;">
+                            <i class="fa-solid fa-anchor" style="color: #007bff; margin-right: 5px;"></i>
+                            ${point.name}
+                        </div>`;
+                    });
+                }
+                
+                if (hasPois) {
+                    section.pois.forEach(poi => {
+                        html += `<div onclick="loadPOIInfo(${poi.id})" style="cursor: pointer; padding: 5px 0; font-size: 0.9rem; color: #495057;">
+                            <i class="fa-solid fa-map-pin" style="color: #6c757d; margin-right: 5px;"></i>
+                            ${poi.name} <small style="color: #6c757d;">(${poi.poi_type})</small>
+                        </div>`;
+                    });
+                }
+                
+                html += '</div>';
+            }
+            
+            html += `</div>
+                    </div>
+                </td>
+            </tr>`;
+            
+            // Show bottom waypoint if not shared with next section, OR if it's the last section
+            if (!bottomWaypointShared && section.to_waypoint) {
+                html += `<tr class="waypoint-row">
+                    <td class="waypoint-cell">
+                        <div class="waypoint-circle"></div>
+                        <span class="waypoint-label">${section.to_waypoint}</span>
+                    </td>
+                </tr>`;
+            } else if (bottomWaypointShared && section.to_waypoint) {
+                // Shared waypoint - show in middle row
+                html += `<tr class="waypoint-row waypoint-row-shared">
+                    <td class="waypoint-cell">
+                        <div class="waypoint-circle"></div>
+                        <span class="waypoint-label">${section.to_waypoint}</span>
+                    </td>
+                </tr>`;
+            }
         });
-        html += '</div>';
+        
+        html += '</table>';
         if (data.total_distance_km !== undefined) {
             html += `<div class="route-total">Total Distance: ${data.total_distance_km.toFixed(2)} km</div>`;
         }
     } else {
         html += '<div style="padding: 10px; color: #6c757d;">No route sections selected</div>';
-    }
-    
-    // Display nearby launch points
-    if (data.nearby_launch_points && Array.isArray(data.nearby_launch_points) && data.nearby_launch_points.length > 0) {
-        html += '<div class="nearby-points">';
-        html += '<h4>Nearby Launch Points</h4>';
-        html += '<ul>';
-        data.nearby_launch_points.forEach(point => {
-            const distanceKm = (point.distance_meters / 1000).toFixed(2);
-            html += `<li onclick="loadLaunchPointInfo(${point.id})" style="cursor: pointer;">
-                ${point.name}
-                <span class="distance">${distanceKm} km</span>
-            </li>`;
-        });
-        html += '</ul>';
-        html += '</div>';
-    }
-    
-    // Display nearby POIs
-    if (data.nearby_pois && Array.isArray(data.nearby_pois) && data.nearby_pois.length > 0) {
-        html += '<div class="nearby-points">';
-        html += '<h4>Nearby Points of Interest</h4>';
-        html += '<ul>';
-        data.nearby_pois.forEach(poi => {
-            const distanceKm = (poi.distance_meters / 1000).toFixed(2);
-            html += `<li onclick="loadPOIInfo(${poi.id})" style="cursor: pointer;">
-                ${poi.name} <small>(${poi.poi_type})</small>
-                <span class="distance">${distanceKm} km</span>
-            </li>`;
-        });
-        html += '</ul>';
-        html += '</div>';
     }
     
     routeList.innerHTML = html;
@@ -337,11 +388,46 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+function deselectRouteSection(sectionId) {
+    // Remove section from selection
+    if (!window.selectedSections) {
+        window.selectedSections = new Set();
+    }
+    
+    // Convert to number if needed
+    const sectionIdNum = parseInt(sectionId);
+    window.selectedSections.delete(sectionIdNum);
+    window.selectedSections.delete(sectionId); // Also try as string
+    
+    console.log('Deselected section', sectionId, 'from selection. Total:', window.selectedSections.size);
+    
+    // Update styling on map
+    if (typeof window.updateRouteSectionStyling === 'function') {
+        window.updateRouteSectionStyling();
+    }
+    
+    // Update route display
+    if (window.selectedSections.size > 0) {
+        updateRouteDisplay();
+    } else {
+        // Clear the route list if no sections selected
+        const routeList = document.getElementById('route-list');
+        if (routeList) {
+            routeList.innerHTML = '<div style="padding: 10px; color: #6c757d;">No route sections selected. Click on route sections on the map to select them.</div>';
+        }
+        // Clear styling
+        if (typeof window.updateRouteSectionStyling === 'function') {
+            window.updateRouteSectionStyling();
+        }
+    }
+}
+
 // Export function for use in map.js
 // Make sure it's available globally
 window.toggleRouteSection = toggleRouteSection;
 window.updateRouteDisplay = updateRouteDisplay;
 window.updateRouteSectionStyling = updateRouteSectionStyling;
+window.deselectRouteSection = deselectRouteSection;
 
 // Initialize selectedSections if not already set
 if (!window.selectedSections) {
