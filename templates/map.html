@@ -64,6 +64,10 @@
 
 {% block extra_js %}
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    // Pass user admin status to JavaScript
+    window.userIsAdmin = {% if user.is_authenticated and user.is_staff %}true{% else %}false{% endif %};
+</script>
 <script src="{% static 'js/route_selection.js' %}"></script>
 <script src="{% static 'js/map.js' %}"></script>
 <script src="{% static 'js/htmx_integration.js' %}"></script>

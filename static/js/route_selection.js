@@ -275,12 +275,20 @@ function displayRouteInfo(data) {
             const hasLaunchPoints = section.launch_points && section.launch_points.length > 0;
             const hasPois = section.pois && section.pois.length > 0;
             
+            // Check if user is admin (from global variable set in template)
+            const isAdmin = typeof window.userIsAdmin !== 'undefined' && window.userIsAdmin;
+            const adminEditLink = isAdmin ? 
+                `<a href="/admin/core/routesection/${section.id}/change/" class="admin-edit-btn" title="Edit in admin" target="_blank">
+                    <i class="fa-solid fa-wrench"></i>
+                </a>` : '';
+            
             html += `<tr class="section-row">
                 <td class="section-cell">
                     <div class="route-section-item">
                         <button class="deselect-section-btn" onclick="deselectRouteSection(${section.id})" title="Deselect section">
                             <i class="fa-solid fa-times"></i>
                         </button>
+                        ${adminEditLink}
                         <div class="section-content">
                             <div>
                                 ${section.waterbody_name ? `<strong>${section.waterbody_name}</strong>` : ''}
