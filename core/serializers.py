@@ -127,10 +127,26 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = ['id', 'user_username', 'text', 'needs_fixing', 'images', 'ratings', 'status', 'status_display', 'created_at', 'updated_at']
 
 
+class WalkPathDetailSerializer(serializers.ModelSerializer):
+    """Serializer for WalkPath in detail views."""
+    station_name = serializers.CharField(source='station.name', read_only=True)
+    station_types = serializers.SerializerMethodField()
+    distance_meters = serializers.FloatField(read_only=True)
+
+    class Meta:
+        model = WalkPath
+        fields = ['id', 'station_name', 'station_types', 'distance_meters']
+
+    def get_station_types(self, obj):
+        """Get transport types with icons for the station."""
+        return [{'key': st.key, 'name': st.name, 'icon': st.icon_class} for st in obj.station.station_types.all()]
+
+
 class LaunchPointDetailSerializer(serializers.ModelSerializer):
     """Detailed serializer for LaunchPoint."""
     images = ImageSerializer(many=True, read_only=True)
     comments = CommentSerializer(many=True, read_only=True)
+    walk_paths = WalkPathDetailSerializer(many=True, read_only=True)
     accessibility_display = serializers.CharField(source='get_accessibility_display', read_only=True)
     status_display = serializers.CharField(source='get_status_display', read_only=True)
     # Aggregate ratings from approved comments
@@ -141,7 +157,7 @@ class LaunchPointDetailSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'name', 'location', 'accessibility', 'accessibility_display',
             'description', 'status', 'status_display', 'images', 'comments',
-            'average_ratings', 'created_at', 'updated_at'
+            'walk_paths', 'average_ratings', 'created_at', 'updated_at'
         ]
 
     def get_average_ratings(self, obj):

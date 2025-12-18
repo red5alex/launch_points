@@ -583,6 +583,29 @@ function loadLaunchPointInfo(id) {
                     html += `<div class="info-box-description">${data.description}</div>`;
                 }
                 
+                // Display walk paths with stations and transport types
+                if (data.walk_paths && data.walk_paths.length > 0) {
+                    html += '<div class="info-box-walk-paths" style="margin: 15px 0;">';
+                    html += '<h4 style="margin-bottom: 10px; font-size: 1rem;">Public Transport</h4>';
+                    data.walk_paths.forEach(walkPath => {
+                        html += '<div style="margin-bottom: 10px; padding: 8px; background-color: #f8f9fa; border-radius: 4px;">';
+                        html += `<div style="font-weight: 500; margin-bottom: 5px;">${walkPath.station_name}</div>`;
+                        if (walkPath.station_types && walkPath.station_types.length > 0) {
+                            html += '<div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">';
+                            walkPath.station_types.forEach(stationType => {
+                                html += `<span style="display: inline-flex; align-items: center; gap: 4px; font-size: 0.9rem;">`;
+                                html += `<i class="${stationType.icon}"></i>`;
+                                html += `<span>${stationType.name}</span>`;
+                                html += `</span>`;
+                            });
+                            html += '</div>';
+                        }
+                        html += `<div style="margin-top: 5px; color: #6c757d; font-size: 0.85rem;">Distance: ${Math.round(walkPath.distance_meters)} m</div>`;
+                        html += '</div>';
+                    });
+                    html += '</div>';
+                }
+                
                 // Display images
                 if (data.images && data.images.length > 0) {
                     html += '<div class="info-box-images">';
