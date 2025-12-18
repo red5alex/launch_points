@@ -214,50 +214,46 @@ class RouteSectionViewSet(viewsets.ReadOnlyModelViewSet):
         status_filter = get_status_filter(request.user)
 
         for section in sections:
-            # Sample points along the route (every 100m or so)
-            coords = section.route.coords
-            sample_points = []
-            for i in range(0, len(coords), max(1, len(coords) // 10)):  # Sample ~10 points per section
-                sample_points.append(coords[i])
+            # Use the LineString directly for distance queries
+            # This finds points within distance of the line itself, not just sampled points
+            # The distance is calculated to the nearest point on the line
+            route_linestring = section.route
+            
+            # Find nearby launch points - distance is calculated to nearest point on the line
+            nearby_lps = LaunchPoint.objects.filter(
+                location__distance_lte=(route_linestring, D(m=search_radius_meters)),
+                status__in=status_filter
+            ).annotate(
+                distance=Distance('location', route_linestring)
+            ).order_by('distance').distinct()
 
-            for coord in sample_points:
-                point = Point(coord[0], coord[1], srid=4326)
+            for lp in nearby_lps:
+                if lp.id not in [n['id'] for n in nearby_launch_points]:
+                    nearby_launch_points.append({
+                        'id': lp.id,
+                        'name': lp.name,
+                        'distance_meters': round(lp.distance.m, 0),
+                        'nearest_section_id': section.id,
+                        'accessibility': lp.accessibility
+                    })
 
-                # Find nearby launch points
-                nearby_lps = LaunchPoint.objects.filter(
-                    location__distance_lte=(point, D(m=search_radius_meters)),
-                    status__in=status_filter
-                ).annotate(
-                    distance=Distance('location', point)
-                ).order_by('distance')[:5]
+            # Find nearby POIs - distance is calculated to nearest point on the line
+            nearby_poi_list = PointOfInterest.objects.filter(
+                location__distance_lte=(route_linestring, D(m=search_radius_meters)),
+                status__in=status_filter
+            ).annotate(
+                distance=Distance('location', route_linestring)
+            ).order_by('distance').distinct()
 
-                for lp in nearby_lps:
-                    if lp.id not in [n['id'] for n in nearby_launch_points]:
-                        nearby_launch_points.append({
-                            'id': lp.id,
-                            'name': lp.name,
-                            'distance_meters': round(lp.distance.m, 0),
-                            'nearest_section_id': section.id,
-                            'accessibility': lp.accessibility
-                        })
-
-                # Find nearby POIs
-                nearby_poi_list = PointOfInterest.objects.filter(
-                    location__distance_lte=(point, D(m=search_radius_meters)),
-                    status__in=status_filter
-                ).annotate(
-                    distance=Distance('location', point)
-                ).order_by('distance')[:5]
-
-                for poi in nearby_poi_list:
-                    if poi.id not in [n['id'] for n in nearby_pois]:
-                        nearby_pois.append({
-                            'id': poi.id,
-                            'name': poi.name,
-                            'poi_type': poi.poi_type.name,
-                            'distance_meters': round(poi.distance.m, 0),
-                            'nearest_section_id': section.id
-                        })
+            for poi in nearby_poi_list:
+                if poi.id not in [n['id'] for n in nearby_pois]:
+                    nearby_pois.append({
+                        'id': poi.id,
+                        'name': poi.name,
+                        'poi_type': poi.poi_type.name,
+                        'distance_meters': round(poi.distance.m, 0),
+                        'nearest_section_id': section.id
+                    })
 
         # Serialize sections
         section_serializer = RouteSectionGeoJSONSerializer(sections, many=True)
