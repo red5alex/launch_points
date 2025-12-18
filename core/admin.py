@@ -107,14 +107,20 @@ class WaypointAdmin(FixedOSMGeoAdmin):
 
 @admin.register(RouteSection)
 class RouteSectionAdmin(FixedOSMGeoAdmin):
-    list_display = ['name', 'waterbody', 'distance_meters', 'status', 'created_by', 'created_at']
+    list_display = ['display_name', 'from_waypoint', 'to_waypoint', 'waterbody', 'distance_meters', 'status', 'created_by', 'created_at']
     list_filter = ['status', 'waterbody', 'created_at']
-    search_fields = ['name']
+    search_fields = ['name', 'from_waypoint__name', 'to_waypoint__name']
     filter_horizontal = ['route_types']
     readonly_fields = ['created_at', 'updated_at', 'distance_meters']
     default_lon = 13.4050
     default_lat = 52.5200
     default_zoom = 11
+    
+    def display_name(self, obj):
+        """Return a display name that always has content for admin links."""
+        return obj.name.strip() if obj.name and obj.name.strip() else f"Route Section {obj.id}"
+    display_name.short_description = 'Name'
+    display_name.admin_order_field = 'name'  # Allow sorting by name field
 
 
 @admin.register(WalkPath)
