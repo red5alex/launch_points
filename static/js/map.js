@@ -586,7 +586,11 @@ function loadLaunchPointInfo(id) {
                 if (data.images && data.images.length > 0) {
                     html += '<div class="info-box-images">';
                     data.images.forEach(img => {
-                        const imgUrl = img.image.startsWith('http') ? img.image : `/media/${img.image}`;
+                        // Handle image URL - DRF already includes /media/ prefix
+                        let imgUrl = img.image;
+                        if (!imgUrl.startsWith('http') && !imgUrl.startsWith('/media/')) {
+                            imgUrl = `/media/${imgUrl}`;
+                        }
                         html += `<img src="${imgUrl}" alt="${img.caption || ''}" loading="lazy">`;
                         if (img.caption) {
                             html += `<div style="font-size: 0.85rem; color: #6c757d; margin-bottom: 10px;">${img.caption}</div>`;
@@ -636,7 +640,11 @@ function loadLaunchPointInfo(id) {
                         if (comment.images && comment.images.length > 0) {
                             html += '<div class="info-box-images" style="margin-top: 10px;">';
                             comment.images.forEach(img => {
-                                const imgUrl = img.image.startsWith('http') ? img.image : `/media/${img.image}`;
+                                // Handle image URL - DRF already includes /media/ prefix
+                        let imgUrl = img.image;
+                        if (!imgUrl.startsWith('http') && !imgUrl.startsWith('/media/')) {
+                            imgUrl = `/media/${imgUrl}`;
+                        }
                                 html += `<img src="${imgUrl}" alt="${img.caption || ''}" loading="lazy">`;
                             });
                             html += '</div>';
@@ -681,7 +689,11 @@ function loadPOIInfo(id) {
                 if (data.images && data.images.length > 0) {
                     html += '<div class="info-box-images">';
                     data.images.forEach(img => {
-                        const imgUrl = img.image.startsWith('http') ? img.image : `/media/${img.image}`;
+                        // Handle image URL - DRF already includes /media/ prefix
+                        let imgUrl = img.image;
+                        if (!imgUrl.startsWith('http') && !imgUrl.startsWith('/media/')) {
+                            imgUrl = `/media/${imgUrl}`;
+                        }
                         html += `<img src="${imgUrl}" alt="${img.caption || ''}" loading="lazy">`;
                         if (img.caption) {
                             html += `<div style="font-size: 0.85rem; color: #6c757d; margin-bottom: 10px;">${img.caption}</div>`;
@@ -717,7 +729,11 @@ function loadPOIInfo(id) {
                         if (comment.images && comment.images.length > 0) {
                             html += '<div class="info-box-images" style="margin-top: 10px;">';
                             comment.images.forEach(img => {
-                                const imgUrl = img.image.startsWith('http') ? img.image : `/media/${img.image}`;
+                                // Handle image URL - DRF already includes /media/ prefix
+                        let imgUrl = img.image;
+                        if (!imgUrl.startsWith('http') && !imgUrl.startsWith('/media/')) {
+                            imgUrl = `/media/${imgUrl}`;
+                        }
                                 html += `<img src="${imgUrl}" alt="${img.caption || ''}" loading="lazy">`;
                             });
                             html += '</div>';
