@@ -98,19 +98,29 @@ body {
     position: fixed;
     right: 0;
     top: 60px;
-    width: 350px;
+    width: 700px;
     height: calc(100vh - 60px);
     background: white;
     box-shadow: -2px 0 5px rgba(0,0,0,0.1);
-    overflow-y: auto;
+    overflow-y: hidden;
     z-index: 1000;
+    display: flex;
+    flex-direction: row;
+}
+
+.sidebar-column {
+    width: 50%;
+    height: 100%;
+    overflow-y: auto;
     padding: 20px;
 }
 
+.sidebar-column:first-child {
+    border-right: 2px solid #e0e0e0;
+}
+
 #route-selection-panel {
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 2px solid #e0e0e0;
+    /* Removed margin-bottom and border-bottom as it's now in its own column */
 }
 
 #route-selection-panel h3 {
@@ -236,8 +246,7 @@ body {
 }
 
 #info-box {
-    border-top: 2px solid #e0e0e0;
-    padding-top: 20px;
+    /* Removed border-top as it's now in its own column */
 }
 
 .info-box-header {

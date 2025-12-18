@@ -263,18 +263,6 @@ function displayRouteInfo(data) {
         html += '<div style="padding: 10px; color: #6c757d;">No route sections selected</div>';
     }
     
-    // Display waypoints
-    if (data.waypoints && Array.isArray(data.waypoints) && data.waypoints.length > 0) {
-        html += '<div class="waypoints-section" style="margin-top: 15px;">';
-        html += '<h4>Waypoints</h4>';
-        html += '<ul style="list-style: none; padding: 0;">';
-        data.waypoints.forEach(waypoint => {
-            html += `<li style="padding: 5px 0;">• ${waypoint.name || 'Waypoint ' + waypoint.id}</li>`;
-        });
-        html += '</ul>';
-        html += '</div>';
-    }
-    
     // Display nearby launch points
     if (data.nearby_launch_points && Array.isArray(data.nearby_launch_points) && data.nearby_launch_points.length > 0) {
         html += '<div class="nearby-points">';

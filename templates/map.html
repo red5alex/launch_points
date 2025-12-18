@@ -14,19 +14,29 @@
     }
     #map {
         height: 100%;
-        width: calc(100% - 350px);  /* Leave space for sidebar */
+        width: calc(100% - 700px);  /* Leave space for two-column sidebar */
     }
     .sidebar {
         position: fixed;
         right: 0;
         top: 60px;
-        width: 350px;
+        width: 700px;
         height: calc(100vh - 60px);
         background: white;
         box-shadow: -2px 0 5px rgba(0,0,0,0.1);
         overflow-y: auto;
         z-index: 1000;
+        display: flex;
+        flex-direction: row;
+    }
+    .sidebar-column {
+        width: 50%;
+        height: 100%;
+        overflow-y: auto;
         padding: 20px;
+    }
+    .sidebar-column:first-child {
+        border-right: 2px solid #e0e0e0;
     }
 </style>
 {% endblock %}
@@ -35,15 +45,19 @@
 <div class="map-container">
     <div id="map"></div>
     <div class="sidebar" id="sidebar">
-        <div id="route-selection-panel">
-            <h3>{% trans "Route Selection" %}</h3>
-            <div class="search-radius-widget">
-                <label for="search-radius">{% trans "Search Radius" %}: <span id="radius-display">500 m</span></label>
-                <input type="range" id="search-radius" min="100" max="2000" step="100" value="500">
+        <div class="sidebar-column">
+            <div id="route-selection-panel">
+                <h3>{% trans "Route Selection" %}</h3>
+                <div class="search-radius-widget">
+                    <label for="search-radius">{% trans "Search Radius" %}: <span id="radius-display">500 m</span></label>
+                    <input type="range" id="search-radius" min="100" max="2000" step="100" value="500">
+                </div>
+                <div id="route-list"></div>
             </div>
-            <div id="route-list"></div>
         </div>
-        <div id="info-box"></div>
+        <div class="sidebar-column">
+            <div id="info-box"></div>
+        </div>
     </div>
 </div>
 {% endblock %}
