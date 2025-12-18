@@ -249,32 +249,27 @@ function loadGeoJSONLayers() {
                 console.log('First feature properties.id:', data.features[0].properties ? data.features[0].properties.id : 'N/A');
             }
             
-            L.geoJSON(data, {
+            const routeSectionLayer = L.geoJSON(data, {
                 style: function(feature) {
-                    // Get ID from feature level or properties
-                    const featureId = feature.id !== undefined ? feature.id : (feature.properties ? feature.properties.id : null);
+                    // Initial style - will be updated by updateRouteSectionStyling()
                     const status = feature.properties ? feature.properties.status : 'approved';
                     const isPending = status === 'pending';
-                    const isSelected = featureId !== null && selectedSections.has(featureId);
-                    
-                    let color = isSelected ? '#ff0000' : '#0066cc';
-                    let weight = isSelected ? 5 : 3;
-                    let opacity = isPending ? 0.5 : 0.7;
                     
                     // Lighter/dashed for pending
                     if (isPending) {
                         return {
                             color: '#ff9999',
-                            weight: weight,
-                            opacity: opacity,
+                            weight: 3,
+                            opacity: 0.5,
                             dashArray: '5, 10'
                         };
                     }
                     
+                    // Default style (will be updated when selected)
                     return {
-                        color: color,
-                        weight: weight,
-                        opacity: opacity
+                        color: '#0066cc',
+                        weight: 3,
+                        opacity: 0.7
                     };
                 },
                 onEachFeature: function(feature, layer) {
@@ -294,6 +289,10 @@ function loadGeoJSONLayers() {
                     });
                     
                     layer.bindTooltip(`${name} - ${distance || 0} km${statusText}`);
+                    // Store feature ID on the layer for reference (important for styling updates)
+                    layer.featureId = featureId;
+                    layer.feature = feature;  // Also store the full feature for reference
+                    
                     layer.on('click', function() {
                         if (featureId === null || featureId === undefined) {
                             console.error('Route section feature has no ID:', feature);
@@ -315,11 +314,14 @@ function loadGeoJSONLayers() {
                             }, 100);
                         }
                     });
-                    
-                    // Store feature ID on the layer for reference
-                    layer.featureId = featureId;
                 }
-            }).addTo(layers.routeSections);
+            });
+            
+            // Add the GeoJSON layer to the layer group
+            routeSectionLayer.addTo(layers.routeSections);
+            
+            // Store reference for easier access
+            window.routeSectionLayer = routeSectionLayer;
         })
         .catch(error => console.error('Error loading route sections:', error));
 

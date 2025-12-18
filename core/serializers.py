@@ -147,18 +147,31 @@ class LaunchPointDetailSerializer(serializers.ModelSerializer):
     def get_average_ratings(self, obj):
         """Calculate average ratings from approved comments."""
         from django.db.models import Avg
-        approved_comments = obj.comments.filter(status='approved')
-        ratings = Rating.objects.filter(comment__in=approved_comments)
-        
-        result = {}
-        for category in ['accessibility', 'space', 'security']:
-            category_ratings = ratings.filter(category=category)
-            if category_ratings.exists():
-                result[category] = {
-                    'average': round(category_ratings.aggregate(Avg('value'))['value__avg'], 2),
-                    'count': category_ratings.count()
-                }
-        return result
+        try:
+            approved_comments = obj.comments.filter(status='approved')
+            if not approved_comments.exists():
+                return {}
+            
+            ratings = Rating.objects.filter(comment__in=approved_comments)
+            if not ratings.exists():
+                return {}
+            
+            result = {}
+            for category in ['accessibility', 'space', 'security']:
+                category_ratings = ratings.filter(category=category)
+                if category_ratings.exists():
+                    avg_value = category_ratings.aggregate(Avg('value'))['value__avg']
+                    result[category] = {
+                        'average': round(avg_value, 2) if avg_value else 0.0,
+                        'count': category_ratings.count()
+                    }
+            return result
+        except Exception as e:
+            # Log error but don't break the serializer
+            import logging
+            logger = logging.getLogger(__name__)
+            logger.error(f"Error calculating average ratings for launch point {obj.id}: {e}")
+            return {}
 
     def to_representation(self, instance):
         """Convert location to lat/lon format."""

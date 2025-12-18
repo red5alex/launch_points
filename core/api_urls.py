@@ -28,7 +28,11 @@ urlpatterns = [
     path('stations/geojson/', PublicTransportStationViewSet.as_view({'get': 'geojson'}), name='stations-geojson'),
     path('walk-paths/geojson/', WalkPathViewSet.as_view({'get': 'geojson'}), name='walk-paths-geojson'),
     path('calculate-route/', RouteSectionViewSet.as_view({'post': 'calculate_route'}), name='calculate-route'),
-    path('launch-point/<int:pk>/', LaunchPointViewSet.as_view({'get': 'detail'}), name='launch-point-detail'),
-    path('poi/<int:pk>/', PointOfInterestViewSet.as_view({'get': 'detail'}), name='poi-detail'),
+    # Detail endpoints using router's detail view
+    path('launch-points/<int:pk>/detail/', LaunchPointViewSet.as_view({'get': 'detail'}), name='launch-point-detail'),
+    path('pois/<int:pk>/detail/', PointOfInterestViewSet.as_view({'get': 'detail'}), name='poi-detail'),
+    # Convenience endpoints with simpler names
+    path('launch-point/<int:pk>/', LaunchPointViewSet.as_view({'get': 'retrieve'}), name='launch-point-detail-simple'),
+    path('poi/<int:pk>/', PointOfInterestViewSet.as_view({'get': 'retrieve'}), name='poi-detail-simple'),
 ]
 

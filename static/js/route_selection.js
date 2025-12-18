@@ -21,44 +21,108 @@ function toggleRouteSection(sectionId) {
 
 function updateRouteSectionStyling() {
     // Update the visual styling of route sections based on selection
-    if (!window.layers || !window.layers.routeSections) return;
+    if (!window.layers || !window.layers.routeSections) {
+        console.warn('Route sections layer not available for styling update');
+        return;
+    }
     
+    if (!window.selectedSections) {
+        window.selectedSections = new Set();
+    }
+    
+    let updatedCount = 0;
+    let checkedCount = 0;
+    let missingIdCount = 0;
+    
+    console.log(`Starting styling update. Selected sections: [${Array.from(window.selectedSections).join(', ')}]`);
+    
+    // L.geoJSON creates a FeatureGroup, which when added to layers.routeSections creates nested groups
+    // We need to iterate through the FeatureGroup's layers, not the outer LayerGroup
+    const allLayers = window.layers.routeSections.getLayers();
+    console.log(`Route sections layer group has ${allLayers.length} top-level layers`);
+    
+    // Iterate through all layers - handle both direct layers and nested FeatureGroups
     window.layers.routeSections.eachLayer(function(layer) {
+        // Check if this is a FeatureGroup (from L.geoJSON)
+        if (layer instanceof L.FeatureGroup || layer instanceof L.GeoJSON) {
+            // Iterate through the FeatureGroup's layers
+            layer.eachLayer(function(featureLayer) {
+                checkedCount++;
+                updateLayerStyle(featureLayer, checkedCount);
+            });
+        } else {
+            // Direct layer
+            checkedCount++;
+            updateLayerStyle(layer, checkedCount);
+        }
+    });
+    
+    function updateLayerStyle(layer, layerIndex) {
         // Get ID from layer.featureId (set in map.js) or from feature
         let sectionId = layer.featureId;
-        if (sectionId === undefined && layer.feature) {
-            sectionId = layer.feature.id !== undefined ? layer.feature.id : (layer.feature.properties ? layer.feature.properties.id : null);
+        
+        // If featureId not set, try to get it from the feature
+        if (sectionId === undefined || sectionId === null) {
+            if (layer.feature) {
+                sectionId = layer.feature.id !== undefined ? layer.feature.id : (layer.feature.properties ? layer.feature.properties.id : null);
+            }
+        }
+        
+        // Debug first few layers or if we're looking for a specific ID
+        if (layerIndex <= 5 || sectionId === 15) {
+            console.log(`Layer ${layerIndex}: featureId=${layer.featureId}, sectionId=${sectionId}, has feature=${!!layer.feature}, feature.id=${layer.feature ? layer.feature.id : 'N/A'}, layer type=${layer.constructor.name}`);
         }
         
         if (sectionId === null || sectionId === undefined) {
-            console.warn('Route section layer has no ID:', layer);
+            missingIdCount++;
+            // Skip layers without IDs (shouldn't happen, but be defensive)
             return;
         }
         
-        const isSelected = window.selectedSections.has(sectionId);
+        // Convert to number for comparison (in case it's a string)
+        const sectionIdNum = typeof sectionId === 'string' ? parseInt(sectionId, 10) : sectionId;
+        
+        // Check if this section is selected (check both number and original value)
+        const isSelected = window.selectedSections.has(sectionIdNum) || 
+                          window.selectedSections.has(sectionId) ||
+                          (typeof sectionId === 'number' && window.selectedSections.has(String(sectionId)));
+        
         const isPending = layer.feature && layer.feature.properties && layer.feature.properties.status === 'pending';
         
+        // Debug selected sections
+        if (isSelected || sectionId === 15) {
+            console.log(`Section ${sectionId} (num: ${sectionIdNum}): isSelected=${isSelected}, selectedSections=[${Array.from(window.selectedSections).join(', ')}]`);
+        }
+        
+        // Apply styling based on selection and status
         if (isSelected) {
             layer.setStyle({
-                color: '#ff0000',
-                weight: 5,
-                opacity: 0.8
+                color: '#ff0000',  // Red for selected
+                weight: 5,         // Thicker line
+                opacity: 0.9,      // More opaque
+                dashArray: null    // Solid line
             });
+            updatedCount++;
+            console.log(`✓ Highlighted section ${sectionId} in red`);
         } else if (isPending) {
             layer.setStyle({
-                color: '#ff9999',
+                color: '#ff9999',  // Light red for pending
                 weight: 3,
                 opacity: 0.5,
-                dashArray: '5, 10'
+                dashArray: '5, 10' // Dashed line
             });
         } else {
             layer.setStyle({
-                color: '#0066cc',
+                color: '#0066cc',  // Blue for normal
                 weight: 3,
-                opacity: 0.7
+                opacity: 0.7,
+                dashArray: null    // Solid line
             });
         }
-    });
+    }
+    
+    console.log(`Updated styling: Checked ${checkedCount} layers, ${missingIdCount} missing IDs, ${updatedCount} selected sections highlighted`);
+    console.log(`Selected sections: [${Array.from(window.selectedSections).join(', ')}]`);
 }
 
 function updateRouteDisplay() {

@@ -46,6 +46,14 @@ class LaunchPointViewSet(viewsets.ReadOnlyModelViewSet):
         queryset = LaunchPoint.objects.all()
         status_filter = get_status_filter(self.request.user)
         return queryset.filter(status__in=status_filter)
+    
+    def get_serializer_class(self):
+        """Use detail serializer for retrieve, GeoJSON for list."""
+        if self.action == 'retrieve' or self.action == 'detail':
+            return LaunchPointDetailSerializer
+        elif self.action == 'geojson':
+            return LaunchPointGeoJSONSerializer
+        return LaunchPointDetailSerializer
 
     @action(detail=False, methods=['get'])
     def geojson(self, request):
@@ -55,12 +63,26 @@ class LaunchPointViewSet(viewsets.ReadOnlyModelViewSet):
         # GeoFeatureModelSerializer with many=True returns a FeatureCollection directly
         return Response(serializer.data)
 
+    def retrieve(self, request, *args, **kwargs):
+        """Return detailed information for a launch point."""
+        try:
+            instance = self.get_object()
+            serializer = LaunchPointDetailSerializer(instance)
+            return Response(serializer.data)
+        except Exception as e:
+            import logging
+            logger = logging.getLogger(__name__)
+            logger.error(f"Error in launch point detail view: {e}", exc_info=True)
+            from rest_framework import status as http_status
+            return Response(
+                {'error': str(e)},
+                status=http_status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+    
     @action(detail=True, methods=['get'])
     def detail(self, request, pk=None):
-        """Return detailed information for a launch point."""
-        launch_point = self.get_object()
-        serializer = LaunchPointDetailSerializer(launch_point)
-        return Response(serializer.data)
+        """Alias for retrieve using detail serializer."""
+        return self.retrieve(request, pk=pk)
 
 
 class PointOfInterestViewSet(viewsets.ReadOnlyModelViewSet):
@@ -73,6 +95,14 @@ class PointOfInterestViewSet(viewsets.ReadOnlyModelViewSet):
         queryset = PointOfInterest.objects.all()
         status_filter = get_status_filter(self.request.user)
         return queryset.filter(status__in=status_filter)
+    
+    def get_serializer_class(self):
+        """Use detail serializer for retrieve, GeoJSON for list."""
+        if self.action == 'retrieve' or self.action == 'detail':
+            return PointOfInterestDetailSerializer
+        elif self.action == 'geojson':
+            return PointOfInterestGeoJSONSerializer
+        return PointOfInterestDetailSerializer
 
     @action(detail=False, methods=['get'])
     def geojson(self, request):
@@ -82,12 +112,26 @@ class PointOfInterestViewSet(viewsets.ReadOnlyModelViewSet):
         # GeoFeatureModelSerializer with many=True returns a FeatureCollection directly
         return Response(serializer.data)
 
+    def retrieve(self, request, *args, **kwargs):
+        """Return detailed information for a POI."""
+        try:
+            instance = self.get_object()
+            serializer = PointOfInterestDetailSerializer(instance)
+            return Response(serializer.data)
+        except Exception as e:
+            import logging
+            logger = logging.getLogger(__name__)
+            logger.error(f"Error in POI detail view: {e}", exc_info=True)
+            from rest_framework import status as http_status
+            return Response(
+                {'error': str(e)},
+                status=http_status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+    
     @action(detail=True, methods=['get'])
     def detail(self, request, pk=None):
-        """Return detailed information for a POI."""
-        poi = self.get_object()
-        serializer = PointOfInterestDetailSerializer(poi)
-        return Response(serializer.data)
+        """Alias for retrieve using detail serializer."""
+        return self.retrieve(request, pk=pk)
 
 
 class RouteSectionViewSet(viewsets.ReadOnlyModelViewSet):
