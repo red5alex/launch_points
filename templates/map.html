@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans "Map" %} - {% trans "Launch Points" %}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+    .map-container {
+        position: relative;
+        width: 100%;
+        height: calc(100vh - 60px);
+    }
+    #map {
+        height: 100%;
+        width: calc(100% - 350px);  /* Leave space for sidebar */
+    }
+    .sidebar {
+        position: fixed;
+        right: 0;
+        top: 60px;
+        width: 350px;
+        height: calc(100vh - 60px);
+        background: white;
+        box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+        overflow-y: auto;
+        z-index: 1000;
+        padding: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="map-container">
+    <div id="map"></div>
+    <div class="sidebar" id="sidebar">
+        <div id="route-selection-panel">
+            <h3>{% trans "Route Selection" %}</h3>
+            <div class="search-radius-widget">
+                <label for="search-radius">{% trans "Search Radius" %}: <span id="radius-display">500 m</span></label>
+                <input type="range" id="search-radius" min="100" max="2000" step="100" value="500">
+            </div>
+            <div id="route-list"></div>
+        </div>
+        <div id="info-box"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="{% static 'js/route_selection.js' %}"></script>
+<script src="{% static 'js/map.js' %}"></script>
+<script src="{% static 'js/htmx_integration.js' %}"></script>
+{% endblock %}
+

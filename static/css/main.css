@@ -1,0 +1,393 @@
+/* Main CSS for Launch Points Web Application */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 60px;
+    background-color: #2c3e50;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 1001;
+}
+
+.navbar-brand h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.navbar-menu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.navbar-regions {
+    display: flex;
+    gap: 10px;
+}
+
+.navbar-regions a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    transition: background-color 0.2s;
+}
+
+.navbar-regions a:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+.navbar-language select {
+    padding: 5px 10px;
+    border-radius: 3px;
+    border: 1px solid rgba(255,255,255,0.3);
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+}
+
+.navbar-language select option {
+    background-color: #2c3e50;
+    color: white;
+}
+
+.navbar-auth {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.navbar-auth a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    transition: background-color 0.2s;
+}
+
+.navbar-auth a:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+.main-content {
+    height: calc(100vh - 60px);
+    position: relative;
+}
+
+.map-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.sidebar {
+    position: fixed;
+    right: 0;
+    top: 60px;
+    width: 350px;
+    height: calc(100vh - 60px);
+    background: white;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+    overflow-y: auto;
+    z-index: 1000;
+    padding: 20px;
+}
+
+#route-selection-panel {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+#route-selection-panel h3 {
+    margin-bottom: 15px;
+    color: #2c3e50;
+    font-size: 1.2rem;
+}
+
+.search-radius-widget {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+.search-radius-widget label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 500;
+    color: #495057;
+}
+
+.search-radius-widget #radius-display {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.search-radius-widget input[type="range"] {
+    width: 100%;
+    height: 8px;
+    border-radius: 5px;
+    background: #dee2e6;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.search-radius-widget input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #007bff;
+    cursor: pointer;
+}
+
+.search-radius-widget input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #007bff;
+    cursor: pointer;
+    border: none;
+}
+
+.route-sections {
+    margin-top: 15px;
+}
+
+.route-section-item {
+    padding: 10px;
+    margin-bottom: 8px;
+    background-color: #f8f9fa;
+    border-left: 3px solid #007bff;
+    border-radius: 3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.route-section-item strong {
+    color: #2c3e50;
+}
+
+.route-section-item span {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.route-total {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #e7f3ff;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #0056b3;
+    text-align: center;
+}
+
+.nearby-points {
+    margin-top: 20px;
+}
+
+.nearby-points h4 {
+    margin-bottom: 10px;
+    color: #495057;
+    font-size: 1rem;
+}
+
+.nearby-points ul {
+    list-style: none;
+    padding: 0;
+}
+
+.nearby-points li {
+    padding: 8px;
+    margin-bottom: 5px;
+    background-color: #f8f9fa;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.nearby-points li:hover {
+    background-color: #e9ecef;
+}
+
+.nearby-points li .distance {
+    float: right;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+#info-box {
+    border-top: 2px solid #e0e0e0;
+    padding-top: 20px;
+}
+
+.info-box-header {
+    margin-bottom: 15px;
+}
+
+.info-box-header h3 {
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.info-box-header .status-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.status-badge.approved {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-badge.pending {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.info-box-description {
+    margin: 15px 0;
+    color: #495057;
+    line-height: 1.6;
+}
+
+.info-box-images {
+    margin: 15px 0;
+}
+
+.info-box-images img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.info-box-ratings {
+    margin: 15px 0;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+.info-box-ratings h4 {
+    margin-bottom: 10px;
+    color: #495057;
+    font-size: 1rem;
+}
+
+.rating-category {
+    margin-bottom: 10px;
+}
+
+.rating-category .category-name {
+    font-weight: 500;
+    color: #495057;
+    margin-right: 10px;
+}
+
+.rating-category .rating-value {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.rating-category .rating-count {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-left: 5px;
+}
+
+.info-box-comments {
+    margin-top: 20px;
+}
+
+.info-box-comments h4 {
+    margin-bottom: 10px;
+    color: #495057;
+    font-size: 1rem;
+}
+
+.comment-item {
+    padding: 12px;
+    margin-bottom: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    border-left: 3px solid #dee2e6;
+}
+
+.comment-item.needs-fixing {
+    border-left-color: #dc3545;
+    background-color: #fff5f5;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.comment-user {
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+.comment-date {
+    color: #6c757d;
+    font-size: 0.85rem;
+}
+
+.comment-text {
+    color: #495057;
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+.comment-ratings {
+    display: flex;
+    gap: 15px;
+    margin-top: 8px;
+    font-size: 0.9rem;
+}
+
+.comment-rating-item {
+    color: #6c757d;
+}
+
+.comment-rating-item .rating-value {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.needs-fixing-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    background-color: #dc3545;
+    color: white;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-left: 10px;
+}
+

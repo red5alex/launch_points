@@ -1,0 +1,33 @@
+# Django Web Application Requirements
+# For the Launch Points Web Framework
+
+# Core Django
+Django>=4.2,<5.0
+djangorestframework>=3.14
+djangorestframework-gis>=1.0
+
+# GeoDjango dependencies
+# Note: On Windows, you may need to install GDAL/GEOS separately
+# See: https://docs.djangoproject.com/en/4.2/ref/contrib/gis/install/
+
+# CORS support
+django-cors-headers>=4.0
+
+# Image processing
+Pillow>=10.0
+
+# Data import utilities
+pandas>=1.5  # For CSV import in management commands
+geopy>=2.3  # For distance calculations
+
+# Database drivers
+# For development (Spatialite) - included with Django
+# For production (MariaDB)
+# Using pymysql instead of mysqlclient for better Windows compatibility
+# (mysqlclient requires C libraries that are difficult to install on Windows)
+pymysql>=1.0
+
+# Development tools (optional)
+# ipython>=8.0
+# django-debug-toolbar>=4.0
+
