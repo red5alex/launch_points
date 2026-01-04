@@ -1,177 +1,341 @@
-# Launchpoints Berlin 🛶
+# PaddleMap 🛶
 
-Launch Points for folding kayaks, SUPs and other collapsible water craft that can be transported on public transit. This repository contains data and tools to create an interactive Folium map of:
+A professional web application for planning watercraft tours (kayaks, SUPs, etc.) accessible by public transit. PaddleMap provides an interactive map interface to explore launch points, plan routes, and discover points of interest along waterways.
 
-- Launch points (with or without nearby public transport)
-- Walkways to nearest public transport
-- Resting points
-- Paddling routes (LineString features with distance)
+## Features
 
-The map generation is implemented in `launch_points/generator.py` and can be run via the CLI (`python -m launch_points.cli generate`) to produce the static outputs `berlin/index.html` (public map) and `berlin/editor.html` (interactive editor view with drawing tools).
+### Current Implementation
 
-Yes, currently only a single map (Berlin) is implemented - I started the project because I wanted the map :)
+- **Interactive Map Interface**
+  - Leaflet-based map with multiple layers (launch points, POIs, route sections, waypoints, transport stations, walk paths)
+  - Click markers to view detailed information
+  - Visual highlighting of selected launch points and POIs with radius circles
+  - Status-based styling (approved content in full colors, pending content in lighter colors with dashed lines)
 
----
+- **Tour Planning**
+  - Select multiple route sections by clicking on the map
+  - Automatic route calculation with nearby launch points and POIs
+  - Configurable search radius (100-2000 meters) to find points of interest along routes
+  - Visual route display with waypoint markers and waterbody information
+  - Launch points and POIs grouped by route section
 
-## Quick usage — edit data and rebuild the map ✅
+- **Content Management**
+  - Database-backed storage using GeoDjango (Spatialite for development, MariaDB for production)
+  - Django admin interface for content moderation
+  - Status workflow: draft → pending → approved/rejected
+  - Anonymous users see only approved content; logged-in users can see pending content
 
-1. Open the interactive editor:
+- **Data Import**
+  - Import legacy data from CSV and GeoJSON files
+  - Automatic image handling and storage
+  - Support for transport types, launch points, POIs, route sections, stations, and walk paths
 
-	 - Open `berlin/editor.html` in your browser. This map includes drawing tools (via Leaflet.Draw) so you can add or edit markers and routes temporarily.
+- **Internationalization**
+  - Multi-language support (English and German)
+  - Language switcher in navigation bar
+  - URL-based language selection
 
-2. Create or edit features:
+- **API**
+  - RESTful API with GeoJSON endpoints for all spatial data
+  - Detailed endpoints for launch points and POIs (including images, comments, ratings)
+  - Route calculation endpoint with distance-based point discovery
 
-	 - Use the draw toolbar to add a marker (point) or a line (route).
-	 - After drawing, you can either:
-		 - Click the feature to see its information (popups/tooltips may show coordinates which you can copy to clipboard), or
-		 - Use the Draw plugin's **Export** button to obtain a GeoJSON representation of your edits and copy it to the clipboard.
+### Planned Features
 
-3. Add features to the source data files:
+- User authentication (login/register/logout)
+- Content editing (create/update launch points, route sections)
+- Image upload interface
+- Comment and rating submission
+- Route saving functionality
+- HTMX integration for dynamic updates
 
-	 - Markers (launch points / resting points) are stored as CSV files in `berlin/`:
+## Using the Interface
 
-		 - `berlin/launch_with_transport.csv`
-		 - `berlin/launch_without_transport.csv`
-		 - `berlin/resting_points.csv`
+### Map Navigation
 
-		 CSV expected columns (example):
+- **Pan**: Click and drag the map
+- **Zoom**: Use mouse wheel, zoom controls, or pinch gesture on touch devices
+- **Reset view**: Use the zoom controls or click region links in the navigation bar
 
-		 ```csv
-		 name,lat,lon,transport,accessibility,picture
-		 Licht und Luftbad Müggelsee,52.446309,13.67013,True,good,figs/launch_lichluftbad.jpg
-		 ```
+### Viewing Content
 
-		 Notes:
-		 - Header names should be trimmed (no leading/trailing spaces). The validator script strips and checks header whitespace for you.
-		 - `transport` can be `True`/`False` or empty (nullable). `accessibility` is free-text but typically `good`, `moderate`, `poor`.
-		 - `picture` should be a path relative to the CSV file (e.g., `figs/xxx.jpg`). Validate that the referenced files exist before committing.
+1. **Launch Points**: Displayed as blue markers on the map. Click a marker to view:
+   - Name and location
+   - Accessibility rating
+   - Images (if available)
+   - Comments and ratings
+   - Nearby transport stations
 
-			Adding pictures and images
-			--------------------------
-			Contributors can add pictures for markers to improve the popups on the map. Follow these recommendations for best results:
+2. **Points of Interest (POIs)**: Displayed as green markers. Click to view:
+   - Name and type
+   - Images (if available)
+   - Comments and ratings
 
-			- Storage location: put images inside `berlin/figs/` (preferred). Historically the project also references `fig/` — prefer `figs/` for new content.
-			- File path: set the `picture` CSV column to a path relative to the CSV file, e.g. `figs/launch_lichluftbad.jpg`.
-			- File names: use lowercase, hyphenated filenames (no spaces), e.g. `launch_lichluftbad.jpg`.
-			- File formats: JPEG (`.jpg`/`.jpeg`) and PNG (`.png`) are widely supported. Avoid remote URLs unless you intentionally host images externally (the validator only checks local files).
-			- Image size: keep files reasonably small to improve load times (suggested max ~400 KB); the popup image width is constrained to 150px in the default generator (we recommend scaling and compressing source images to ~600px width while keeping file sizes small).
-			- CSV example row:
+3. **Route Sections**: Displayed as blue lines connecting waypoints. Click a route section to:
+   - Select it for tour planning
+   - View waterbody name and section details
 
-				```csv
-				name,lat,lon,transport,accessibility,picture
-				Licht und Luftbad Müggelsee,52.446309,13.67013,True,good,figs/launch_lichluftbad.jpg
-				```
+4. **Transport Stations**: Displayed with transport type icons. Show connections to launch points via walk paths.
 
-			- Validator behavior: the validator checks for picture existence relative to the CSV file and will report `missing-picture: row N -> <path>` if the file is not found. To avoid validation errors, place the picture in `berlin/figs/` and use the relative path in `picture`.
-			- Customizing popup size: the generator sets the popup image width to 150px (`<img width='150px'>`). If you want a different display size, edit `launch_points/generator.py` where the popup HTML is constructed.
-			- Publishing: when publishing generated HTML (e.g., to GitHub Pages), ensure images from `berlin/figs/` are included in the published paths so they load correctly on the site.
+### Planning a Tour
+
+1. **Select Route Sections**:
+   - Click on route sections (blue lines) on the map to add them to your tour
+   - Selected sections are highlighted in red and appear thicker
+   - Selected sections appear in the "Tour Planner" panel on the right
+
+2. **Adjust Search Radius**:
+   - Use the slider in the Tour Planner panel (100-2000 meters)
+   - This determines how far from the route to search for launch points and POIs
+
+3. **View Tour Details**:
+   - The Tour Planner panel shows:
+     - Selected route sections with waypoint markers
+     - Waterbody names and section names
+     - Launch points and POIs found along each section
+     - Total tour distance
+   - Waypoints are displayed as circles; shared waypoints between consecutive sections show as a single circle
+
+4. **Deselect Sections**:
+   - Click the red X button in the upper right corner of a route section in the Tour Planner panel
+   - Or click the route section again on the map
+
+### Viewing Details
+
+- **Click any marker** (launch point, POI, or station) to load its details in the Info Box (right column)
+- The Info Box shows:
+  - Name and description
+  - Images (click to view full size)
+  - Ratings (accessibility, space, security)
+  - Comments with user feedback
+  - Related information (transport connections, etc.)
+
+### Status Indicators
+
+- **Approved content**: Full colors, solid lines
+- **Pending content**: Lighter colors, dashed lines (visible only to logged-in users)
+- **Selected markers**: Red circle overlay (100m radius) and larger red icon
+
+### Language Switching
+
+- Use the language switcher in the navigation bar to switch between English and German
+- The interface language changes immediately, and URLs include language prefixes (`/en/`, `/de/`)
+
+## Admin Interface
+
+Access the Django admin at `http://127.0.0.1:8000/admin/` using your superuser credentials.
+
+The admin interface allows you to:
+- Approve/reject pending content
+- Edit launch points, POIs, route sections, and other data
+- Manage users and permissions
+- View all content including pending items
 
 
-	 - Routes are stored in GeoJSON (`berlin/routes.geojson`). Each feature should be a `LineString` and may include properties such as:
+## Installation
 
-		 ```json
-		 {
-			 "type": "Feature",
-			 "properties": {"start": "A", "end": "B", "waterbody": "Spree", "sidetrack": true},
-			 "geometry": {"type": "LineString", "coordinates": [[lon, lat], [lon, lat], ...]}
-		 }
-		 ```
+### Prerequisites
 
-		 Important: GeoJSON coordinates are in [lon, lat] order. The map generator converts these to (lat, lon) for distance calculations.
+- Python 3.10 or higher
+- GDAL and GEOS libraries (required for GeoDjango)
+  - **Windows**: Use conda (recommended) or download from [OSGeo4W](https://trac.osgeo.org/osgeo4w/)
+  - **Linux**: `sudo apt-get install gdal-bin libgdal-dev geos libgeos-dev`
+  - **macOS**: `brew install gdal geos`
 
-	### Station paths (optional)
+### Option 1: Conda Environment (Recommended for Windows)
 
-	If you want to include walking paths from launch points to nearby public transport stations, add a `berlin/station_paths.geojson` file with `LineString` features. The generator expects the **first vertex** of each LineString to denote the station location. Each feature should include properties:
+1. **Create conda environment with GDAL/GEOS**:
+   ```powershell
+   conda create -n paddlemap python=3.11 -c conda-forge gdal geos
+   conda activate paddlemap
+   ```
+
+2. **Install Python dependencies**:
+   ```powershell
+   pip install --upgrade pip
+   pip install -r requirements_web.txt
+   ```
+
+### Option 2: Python Virtual Environment
+
+1. **Create virtual environment**:
+   ```powershell
+   # Windows PowerShell
+   python -m venv .venv
+   .\.venv\Scripts\Activate.ps1
+   
+   # Linux/macOS
+   python -m venv .venv
+   source .venv/bin/activate
+   ```
+
+2. **Install GDAL/GEOS** (if not using conda):
+   - Windows: Install from OSGeo4W or use conda
+   - Linux: `sudo apt-get install gdal-bin libgdal-dev geos libgeos-dev`
+   - macOS: `brew install gdal geos`
+
+3. **Set environment variables** (if GDAL/GEOS not in system PATH):
+   ```powershell
+   # Windows - adjust paths as needed
+   $env:GDAL_LIBRARY_PATH = "C:\path\to\gdal.dll"
+   $env:GEOS_LIBRARY_PATH = "C:\path\to\geos_c.dll"
+   ```
+
+4. **Install Python dependencies**:
+   ```powershell
+   pip install --upgrade pip
+   pip install -r requirements_web.txt
+   ```
+
+## Django Setup
+
+1. **Set Django settings module** (if not using default):
+   ```powershell
+   # Windows PowerShell
+   $env:DJANGO_SETTINGS_MODULE = "launch_points_web.settings.development"
+   
+   # Linux/macOS
+   export DJANGO_SETTINGS_MODULE=launch_points_web.settings.development
+   ```
+
+2. **Create database migrations**:
+   ```powershell
+   python manage.py makemigrations
+   python manage.py migrate
+   ```
+
+3. **Create superuser** (for admin access):
+   ```powershell
+   python manage.py createsuperuser
+   ```
+   Follow the prompts to create an admin account.
+
+4. **Import legacy data** (optional, if you have data files in `berlin/` directory):
+   ```powershell
+   python manage.py import_legacy_data --data-dir berlin
+   ```
+   This command imports:
+   - Transport types from `berlin/transport_types.json`
+   - Launch points from `berlin/launch_with_transport.csv` and `berlin/launch_without_transport.csv`
+   - POIs from `berlin/resting_points.csv`
+   - Route sections from `berlin/routes.geojson`
+   - Stations and walk paths from `berlin/station_paths.geojson`
+   - Images copied to `media/images/`
+
+   Use `--dry-run` to preview what would be imported without making changes.
+
+5. **Collect static files**:
+   ```powershell
+   python manage.py collectstatic --noinput
+   ```
+
+6. **Start development server**:
+   ```powershell
+   python manage.py runserver
+   ```
+
+The application will be available at `http://127.0.0.1:8000/`
 
 
-	Behavior:
+## Project Structure
 
+```
+launch_points_web/
+├── manage.py
+├── requirements_web.txt
+├── launch_points_web/          # Main Django project
+│   ├── settings/
+│   │   ├── base.py              # Base settings (GeoDjango, i18n, media)
+│   │   ├── development.py       # Spatialite config
+│   │   └── production.py        # MariaDB config
+│   └── urls.py                  # Root URL config with i18n
+├── core/                        # Main application
+│   ├── models.py                # All GeoDjango models
+│   ├── admin.py                 # Django admin
+│   ├── serializers.py           # DRF serializers (GeoJSON + detail)
+│   ├── api_views.py             # API viewsets and route calculation
+│   ├── views.py                 # Main map view
+│   └── management/commands/
+│       └── import_legacy_data.py  # Data migration from CSV/GeoJSON
+├── templates/
+│   ├── base.html                # Base template (navbar, i18n)
+│   └── map.html                 # Main map view template
+├── static/
+│   ├── css/
+│   │   └── main.css             # Map-centric layout, sidebar styles
+│   └── js/
+│       ├── map.js               # Leaflet map init, layer loading
+│       ├── route_selection.js   # Route selection logic, tour planner
+│       └── htmx_integration.js  # HTMX handlers (placeholder)
+└── media/                       # User-uploaded images
+    └── images/                  # Unified image storage
+```
 
-	Example feature:
+## Troubleshooting
 
-	```json
-	{
-		"type": "Feature",
-		"properties": {"station_name": "Central Station", "station_type": "train"},
-		"geometry": {"type": "LineString", "coordinates": [[lon, lat], [lon, lat], ...]}
-	}
-	```
+### GDAL/GEOS Not Found
 
+**Windows (Conda)**:
+- Ensure you're using a conda environment with GDAL/GEOS installed
+- The settings file auto-detects conda paths
 
-	### Transport types configuration
+**Windows (venv)**:
+- Set `GDAL_LIBRARY_PATH` and `GEOS_LIBRARY_PATH` environment variables
+- Or install GDAL/GEOS via OSGeo4W and add to system PATH
 
-	Transport icons are configurable via `berlin/transport_types.json`. This file maps transport type keys (used in `station_type`) to a small object that includes `name` and `icon` (Font Awesome class). The generator loads this file to choose the icon to render for station markers.
+**Linux/macOS**:
+- Install via package manager: `apt-get install` (Linux) or `brew install` (macOS)
 
-	Example `berlin/transport_types.json`:
+### Database Errors
 
-	```json
-	{
-		"train": {"name": "Train", "icon": "fa-solid fa-train"},
-		"tram": {"name": "Tram", "icon": "fa-solid fa-train-tram"},
-		"bus": {"name": "Bus", "icon": "fa-solid fa-bus"},
-		"metro": {"name": "U-Bahn", "icon": "fa-solid fa-train-subway"}
-	}
-	```
+- Ensure migrations are up to date: `python manage.py migrate`
+- For Spatialite issues, ensure the spatialite extension is available (usually included with GeoDjango)
 
-	To add new transport types (e.g. `metro` or `cablecar`), add a new key with the relevant `name` and `icon` and then reference the key value as `station_type` in your station paths GeoJSON.
+### Static Files Not Loading
 
-4. Validate your data locally:
+- Run `python manage.py collectstatic`
+- Ensure `DEBUG=True` in development settings (serves static files automatically)
 
-	 - A validator is available at `launch_points/validator.py`. To run it from Python:
+### Import Errors
 
-		 ```python
-		 from launch_points import validator
-		 issues = validator.validate_marker_csv('berlin/launch_with_transport.csv')
-		 print(issues)
-		 ```
+- Check that data files exist in the specified directory
+- Use `--dry-run` to preview imports
+- Ensure CSV files have correct headers (no leading/trailing spaces)
+- Verify image paths in CSV files are correct relative to the data directory
 
-	 - Or run it as a script for one or more CSV files:
+## Development
 
-		 ```powershell
-		 conda run -n launch_points python -m launch_points.validator berlin/launch_with_transport.csv berlin/resting_points.csv
-		 ```
+### Running Tests
 
-5. Rebuild the map:
+```powershell
+python manage.py test
+```
 
- 	- Run the generator via the CLI (recommended):
+### Creating Migrations
 
- 	```powershell
- 	python -m launch_points.cli generate
- 	```
+After modifying models:
+```powershell
+python manage.py makemigrations
+python manage.py migrate
+```
 
- 	- Tests and automated validation (recommended):
+### Translation Updates
 
-		 ```powershell
-		 conda activate launch_points
-		 conda run -n launch_points python -m unittest discover -s tests -v
-		 ```
+After adding new translatable strings:
+```powershell
+python manage.py makemessages -l de
+python manage.py makemessages -l en
+python manage.py compilemessages
+```
 
-	### Command-line (optional)
+## License
 
-	You can also run lightweight project commands from the command line using the bundled CLI module.
+See LICENSE file for details.
 
-	Examples:
+## Contributing
 
-	```powershell
-	# Validate CSVs and print a JSON report but do not fail with non-zero exit
-	python -m launch_points.cli validate --format json --no-exit-on-error
-
-	# Dry-run map generation (does not write files) and skip validation
-	python -m launch_points.cli generate --dry-run --no-validate
-	```
-
-	Note: The CLI uses the repository defaults and does not (currently) accept file path arguments; use the notebook or edit `berlin/*.csv` and `berlin/routes.geojson` manually.
-
-	When errors occur, the CLI now provides short, actionable guidance. Typical suggestions include:
-
-	- For missing pictures: put the image files in `berlin/figs/` (or correct the `picture` paths in the CSV).
-	- For non-numeric coordinates: ensure `lat`/`lon` contain decimal numbers (e.g., `52.446309`).
-	- For unknown `transport` values: use `True`/`False` or leave blank.
-	- For header whitespace: run `python -m launch_points.cli validate --fix` to auto-fix header whitespace.
-
-	If an unexpected exception occurs during generation, the CLI will print a brief explanation of likely causes and recommended next steps (e.g., run the validator, inspect the notebook interactively), followed by the full traceback for debugging.
-
-6. Publish the map:
-
-	 - Commit changes to the CSV/GeoJSON files and the generated `berlin/index.html` (or publish via a CI job to `gh-pages`). Note: You prefer to handle commits yourself — I will remind you when there are safe points to commit (after validation/tests).
-
+Contributions are welcome! Please ensure:
+- Code follows Django and Python best practices
+- Spatial queries use GeoDjango functions
+- Status filtering respects user authentication
+- Translations are updated for new user-facing strings
